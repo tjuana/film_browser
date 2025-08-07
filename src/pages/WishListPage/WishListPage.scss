@@ -1,0 +1,116 @@
+.wishlist-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: $spacing-xl 0;
+
+  .wishlist-header {
+    margin-bottom: $spacing-xl;
+
+    .back-link {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      margin-bottom: $spacing-md;
+      font-weight: 500;
+      transition: $transition-base;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    h1 {
+      color: white;
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+  }
+
+  .wishlist-content {
+    .empty-wishlist {
+      text-align: center;
+      color: white;
+
+      p {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-lg;
+        opacity: 0.8;
+      }
+
+      .browse-link {
+        display: inline-block;
+        background: $primary-color;
+        color: white;
+        text-decoration: none;
+        padding: $spacing-md $spacing-xl;
+        border-radius: $border-radius;
+        font-weight: 600;
+        transition: $transition-base;
+
+        &:hover {
+          background: darken($primary-color, 10%);
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: $spacing-lg;
+
+      .wishlist-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: $border-radius-lg;
+        overflow: hidden;
+        transition: $transition-base;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: $box-shadow-lg;
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        a {
+          display: block;
+          text-decoration: none;
+          color: inherit;
+
+          img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+          }
+
+          h3 {
+            padding: $spacing-md;
+            margin: 0;
+            font-size: $font-size-base;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            line-height: 1.3;
+          }
+        }
+
+        .remove-btn {
+          width: 100%;
+          background: $danger-color;
+          color: white;
+          border: none;
+          padding: $spacing-sm;
+          font-size: $font-size-sm;
+          font-weight: 600;
+          cursor: pointer;
+          transition: $transition-base;
+
+          &:hover {
+            background: darken($danger-color, 10%);
+          }
+        }
+      }
+    }
+  }
+}

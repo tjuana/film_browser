@@ -16,11 +16,4 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, './src/shared'),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "@shared/styles/variables.scss";`,
-      },
-    },
-  },
 });

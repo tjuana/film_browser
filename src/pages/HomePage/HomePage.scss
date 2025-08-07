@@ -1,3 +1,5 @@
+@use '@shared/styles/variables' as *;
+
 .home-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -5,21 +7,39 @@
   .home-header {
     padding: $spacing-lg 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: $spacing-md;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: $spacing-xl;
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
+    }
 
     h1 {
       color: white;
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
+      text-align: center;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 2.5rem;
+        text-align: left;
+      }
     }
 
     .main-nav {
       display: flex;
-      gap: $spacing-lg;
+      justify-content: center;
+      gap: $spacing-md;
+
+      @media (min-width: $breakpoint-md) {
+        gap: $spacing-lg;
+      }
 
       .nav-link {
         color: rgba(255, 255, 255, 0.8);
@@ -28,6 +48,11 @@
         border-radius: $border-radius;
         transition: $transition-base;
         font-weight: 500;
+        font-size: $font-size-sm;
+
+        @media (min-width: $breakpoint-md) {
+          font-size: $font-size-base;
+        }
 
         &:hover,
         &.active {
@@ -40,13 +65,23 @@
 
   .home-content {
     .carousel-section {
-      margin-bottom: $spacing-xl * 2;
+      margin-bottom: $spacing-xl;
+
+      @media (min-width: $breakpoint-md) {
+        margin-bottom: $spacing-xl * 2;
+      }
 
       h2 {
         color: white;
         margin-bottom: $spacing-lg;
-        font-size: 1.75rem;
+        font-size: 1.5rem;
         font-weight: 600;
+        text-align: center;
+
+        @media (min-width: $breakpoint-md) {
+          font-size: 1.75rem;
+          text-align: left;
+        }
       }
     }
   }

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { CarouselWidget } from '@widgets/CarouselWidget';
 import './HomePage.scss';
 
@@ -8,12 +9,12 @@ export const HomePage = () => {
         <header className="home-header">
           <h1>Film Browser</h1>
           <nav className="main-nav">
-            <a href="/" className="nav-link active">
+            <Link to="/" className="nav-link active">
               Home
-            </a>
-            <a href="/wishlist" className="nav-link">
+            </Link>
+            <Link to="/wishlist" className="nav-link">
               Wish List
-            </a>
+            </Link>
           </nav>
         </header>
 

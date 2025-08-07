@@ -46,6 +46,18 @@ export const CarouselWidget = ({ category }: CarouselWidgetProps) => {
       posterPath: 'https://via.placeholder.com/200x300',
       rating: 7.9,
     },
+    {
+      id: '6',
+      title: 'Sample Movie 6',
+      posterPath: 'https://via.placeholder.com/200x300',
+      rating: 7.9,
+    },
+    {
+      id: '7',
+      title: 'Sample Movie 7',
+      posterPath: 'https://via.placeholder.com/200x300',
+      rating: 7.9,
+    },
   ];
 
   return (

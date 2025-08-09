@@ -1,12 +1,9 @@
-.movie-detail-page {
-  padding: 1rem 0;
-}
 @use '@shared/styles/variables' as *;
 @use 'sass:color';
 
 .movie-detail-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: none;
   padding: $spacing-xl 0;
 
   .detail-header {

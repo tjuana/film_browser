@@ -10,24 +10,10 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
           <nav aria-label="Primary">
             <ul style={{ display: 'flex', gap: '1rem', padding: '1rem 0' }}>
               <li>
-                <NavLink
-                  to="/"
-                  aria-current={({ isActive }) =>
-                    isActive ? 'page' : undefined
-                  }
-                >
-                  Home
-                </NavLink>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink
-                  to="/wishlist"
-                  aria-current={({ isActive }) =>
-                    isActive ? 'page' : undefined
-                  }
-                >
-                  Wish List
-                </NavLink>
+                <NavLink to="/wishlist">Wish List</NavLink>
               </li>
             </ul>
           </nav>

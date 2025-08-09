@@ -35,5 +35,5 @@
       "@shared/*": ["src/shared/*"]
     }
   },
-  "include": ["src", "tests"]
+  "include": ["src", "src/tests"]
 }

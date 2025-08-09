@@ -16,7 +16,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom', // дает document/window
     globals: true,
-    setupFiles: './tests/setup.ts', // jest-dom и моки
+    setupFiles: './src/tests/setup.ts', // jest-dom и моки
     css: true,
     restoreMocks: true,
   },

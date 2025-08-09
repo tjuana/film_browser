@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import '@shared/styles/global.scss';
 
 // Pages
 import { HomePage } from '@pages/HomePage';

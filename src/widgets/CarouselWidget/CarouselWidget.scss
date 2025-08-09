@@ -10,6 +10,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
+    width: 100%;
 
     @media (min-width: $breakpoint-md) {
       gap: $spacing-md;

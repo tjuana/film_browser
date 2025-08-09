@@ -1,0 +1,53 @@
+@use './_variables' as *;
+@use './_mixins' as mixins;
+@use './_reset';
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text;
+  background: linear-gradient(
+    180deg,
+    $bg-gradient-start 0%,
+    $bg-gradient-end 100%
+  );
+}
+
+.container {
+  @include mixins.container();
+}
+.sr-only {
+  @include mixins.sr-only;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-heading;
+  font-weight: 700;
+}
+
+a {
+  color: $color-info;
+  transition: color $transition-base;
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+button:focus-visible,
+a:focus-visible {
+  @include mixins.focus-ring;
+}
+
+.app-root {
+  min-height: 100%;
+}

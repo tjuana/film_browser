@@ -1,8 +1,8 @@
-import { useRef } from 'react';
 import { CarouselButton } from './CarouselButton';
 import { CarouselItem } from './CarouselItem';
 import '@widgets/carousel/styles/_carousel.scss';
 import { MovieCard } from '@entities/movie/ui/MovieCard';
+import { useCarouselNav } from '@widgets/carousel/model/useCarouselNav';
 
 type DemoMovie = {
   id: string;
@@ -17,14 +17,7 @@ type CarouselProps = {
 };
 
 export const Carousel = ({ title, items }: CarouselProps) => {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollBy = (direction: -1 | 1) => {
-    const el = trackRef.current;
-    if (!el) return;
-    const amount = Math.max(1, Math.floor(el.clientWidth * 0.9)) * direction;
-    el.scrollBy({ left: amount, behavior: 'smooth' });
-  };
+  const { trackRef, canPrev, canNext, scrollByPage } = useCarouselNav();
 
   return (
     <section className="carousel" aria-label={title}>
@@ -34,8 +27,8 @@ export const Carousel = ({ title, items }: CarouselProps) => {
         role="list"
         tabIndex={0}
         onKeyDown={(e) => {
-          if (e.key === 'ArrowLeft') scrollBy(-1);
-          if (e.key === 'ArrowRight') scrollBy(1);
+          if (e.key === 'ArrowLeft') scrollByPage(-1);
+          if (e.key === 'ArrowRight') scrollByPage(1);
         }}
       >
         {items.map((m) => (
@@ -50,20 +43,24 @@ export const Carousel = ({ title, items }: CarouselProps) => {
         ))}
       </div>
 
-      <CarouselButton
-        className="carousel__btn--prev"
-        aria-label="Previous"
-        onClick={() => scrollBy(-1)}
-      >
-        ‹
-      </CarouselButton>
-      <CarouselButton
-        className="carousel__btn--next"
-        aria-label="Next"
-        onClick={() => scrollBy(1)}
-      >
-        ›
-      </CarouselButton>
+      {canPrev && (
+        <CarouselButton
+          className="carousel__btn--prev"
+          aria-label="Previous"
+          onClick={() => scrollByPage(-1)}
+        >
+          ‹
+        </CarouselButton>
+      )}
+      {canNext && (
+        <CarouselButton
+          className="carousel__btn--next"
+          aria-label="Next"
+          onClick={() => scrollByPage(1)}
+        >
+          ›
+        </CarouselButton>
+      )}
     </section>
   );
 };

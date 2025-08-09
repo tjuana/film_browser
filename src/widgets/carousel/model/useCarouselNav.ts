@@ -11,9 +11,10 @@ type UseCarouselNav = () => {
 const EPSILON = 1;
 
 export const useCarouselNav: UseCarouselNav = () => {
-  const trackRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null!);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
+  const prefersReducedMotionRef = useRef(false);
 
   const pageAmount = useMemo(() => {
     const el = trackRef.current;
@@ -35,7 +36,8 @@ export const useCarouselNav: UseCarouselNav = () => {
     (direction: -1 | 1) => {
       const el = trackRef.current;
       if (!el) return;
-      el.scrollBy({ left: pageAmount * direction, behavior: 'smooth' });
+      const behavior = prefersReducedMotionRef.current ? 'auto' : 'smooth';
+      el.scrollBy({ left: pageAmount * direction, behavior });
     },
     [pageAmount]
   );
@@ -56,6 +58,23 @@ export const useCarouselNav: UseCarouselNav = () => {
 
     const onResize = () => updateState();
     window.addEventListener('resize', onResize);
+
+    // prefers-reduced-motion listener
+    const mql =
+      typeof window !== 'undefined' && 'matchMedia' in window
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : null;
+    if (mql) {
+      prefersReducedMotionRef.current = mql.matches;
+      const onChange = () => {
+        prefersReducedMotionRef.current = mql.matches;
+      };
+      mql.addEventListener?.('change', onChange);
+      if ('addListener' in mql) {
+        // @ts-expect-error legacy Safari API present in older browsers
+        mql.addListener(onChange);
+      }
+    }
 
     return () => {
       el.removeEventListener('scroll', onScroll);

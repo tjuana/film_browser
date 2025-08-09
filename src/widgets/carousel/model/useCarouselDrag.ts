@@ -6,21 +6,23 @@ export const useCarouselDrag = (trackRef: React.RefObject<HTMLDivElement>) => {
     if (!el) return;
 
     let isDown = false;
+    let moved = false;
     let startX = 0;
     let startScrollLeft = 0;
 
     const onPointerDown = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return;
       isDown = true;
+      moved = false;
       startX = e.clientX;
       startScrollLeft = el.scrollLeft;
-      el.setPointerCapture?.(e.pointerId);
       (el as HTMLElement).style.scrollBehavior = 'auto';
     };
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isDown || e.pointerType !== 'mouse') return;
       const delta = e.clientX - startX;
+      if (Math.abs(delta) > 3) moved = true;
       el.scrollLeft = startScrollLeft - delta;
     };
 
@@ -28,7 +30,17 @@ export const useCarouselDrag = (trackRef: React.RefObject<HTMLDivElement>) => {
       if (e.pointerType !== 'mouse') return;
       isDown = false;
       (el as HTMLElement).style.scrollBehavior = '';
-      el.releasePointerCapture?.(e.pointerId);
+      if (moved) {
+        // Prevent the synthetic click generated after a drag
+        const preventClick = (evt: Event) => {
+          evt.stopPropagation();
+          evt.preventDefault();
+        };
+        el.addEventListener('click', preventClick, {
+          capture: true,
+          once: true,
+        });
+      }
     };
 
     el.addEventListener('pointerdown', onPointerDown);

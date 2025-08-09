@@ -56,6 +56,11 @@
   pointer-events: auto;
 }
 
+.carousel__btn[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .carousel__btn--prev {
   inset-inline-start: 0.25rem;
 }

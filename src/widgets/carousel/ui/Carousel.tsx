@@ -5,19 +5,20 @@ import { MovieCard } from '@entities/movie/ui/MovieCard';
 import { useCarouselNav } from '@widgets/carousel/model/useCarouselNav';
 import { useCarouselDrag } from '@widgets/carousel/model/useCarouselDrag';
 
-type DemoMovie = {
-  id: string;
+export type MovieBrief = {
+  id: string | number;
   title: string;
-  posterPath: string;
-  rating: number;
+  posterPath?: string;
+  rating?: number;
 };
 
 type CarouselProps = {
   title: string;
-  items: DemoMovie[];
+  items: MovieBrief[];
+  renderItem?: (m: MovieBrief) => React.ReactNode;
 };
 
-export const Carousel = ({ title, items }: CarouselProps) => {
+export const Carousel = ({ title, items, renderItem }: CarouselProps) => {
   const { trackRef, canPrev, canNext, scrollByPage } = useCarouselNav();
   useCarouselDrag(trackRef);
 
@@ -35,34 +36,36 @@ export const Carousel = ({ title, items }: CarouselProps) => {
       >
         {items.map((m) => (
           <CarouselItem key={m.id}>
-            <MovieCard
-              id={m.id}
-              title={m.title}
-              posterPath={m.posterPath}
-              rating={m.rating}
-            />
+            {renderItem ? (
+              renderItem(m)
+            ) : (
+              <MovieCard
+                id={m.id}
+                title={m.title}
+                posterPath={m.posterPath}
+                rating={m.rating}
+              />
+            )}
           </CarouselItem>
         ))}
       </div>
 
-      {canPrev && (
-        <CarouselButton
-          className="carousel__btn--prev"
-          aria-label="Previous"
-          onClick={() => scrollByPage(-1)}
-        >
-          ‹
-        </CarouselButton>
-      )}
-      {canNext && (
-        <CarouselButton
-          className="carousel__btn--next"
-          aria-label="Next"
-          onClick={() => scrollByPage(1)}
-        >
-          ›
-        </CarouselButton>
-      )}
+      <CarouselButton
+        className="carousel__btn--prev"
+        aria-label="Previous"
+        onClick={() => scrollByPage(-1)}
+        disabled={!canPrev}
+      >
+        ‹
+      </CarouselButton>
+      <CarouselButton
+        className="carousel__btn--next"
+        aria-label="Next"
+        onClick={() => scrollByPage(1)}
+        disabled={!canNext}
+      >
+        ›
+      </CarouselButton>
     </section>
   );
 };

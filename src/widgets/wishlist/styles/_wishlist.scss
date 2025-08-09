@@ -1,4 +1,4 @@
-@use '@shared/styles/_variables' as *;
+// rely on global additionalData for variables/mixins
 @use 'sass:color';
 
 .wishlist-empty {
@@ -14,7 +14,7 @@
   .wishlist-browse-link {
     display: inline-block;
     background: $color-primary;
-    color: $color-text-on-primary;
+    color: $color-text-on-primary; // token ensures contrast on primary
     text-decoration: none;
     padding: $space-sm $space-lg;
     border-radius: $radius-md;

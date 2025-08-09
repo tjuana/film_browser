@@ -1,31 +1,30 @@
-@use '@shared/styles/variables' as *;
 @use 'sass:color';
 
 .movie-detail-page {
   min-height: 100vh;
   background: none;
-  padding: $spacing-xl 0;
+  padding: $space-xl 0;
 
   .detail-header {
-    margin-bottom: $spacing-xl;
+    margin-bottom: $space-xl;
 
     .back-link {
       display: inline-block;
-      color: rgba(255, 255, 255, 0.8);
+      color: $color-text-muted;
       text-decoration: none;
-      margin-bottom: $spacing-md;
+      margin-bottom: $space-md;
       font-weight: 500;
       transition: $transition-base;
 
       &:hover {
-        color: white;
+        color: $color-text;
       }
     }
 
     h1 {
-      color: white;
+      color: $color-text;
       margin: 0;
-      font-size: 2.5rem;
+      font-size: $font-size-3xl;
       font-weight: 700;
     }
   }
@@ -33,29 +32,29 @@
   .detail-content {
     display: grid;
     grid-template-columns: 300px 1fr;
-    gap: $spacing-xl;
+    gap: $space-xl;
     align-items: start;
 
-    @media (max-width: $breakpoint-md) {
+    @media (max-width: $bp-md) {
       grid-template-columns: 1fr;
-      gap: $spacing-lg;
+      gap: $space-lg;
     }
 
     .movie-poster {
       img {
         width: 100%;
-        border-radius: $border-radius-lg;
-        box-shadow: $box-shadow-lg;
+        border-radius: $radius-lg;
+        box-shadow: $shadow-lg;
       }
     }
 
     .movie-info {
-      color: white;
+      color: $color-text;
 
       .movie-meta {
         display: flex;
-        gap: $spacing-lg;
-        margin-bottom: $spacing-lg;
+        gap: $space-lg;
+        margin-bottom: $space-lg;
         font-size: $font-size-lg;
 
         .release-date {
@@ -63,7 +62,7 @@
         }
 
         .rating {
-          color: #ffd700;
+          color: $color-warning;
           font-weight: 600;
         }
       }
@@ -71,25 +70,8 @@
       .overview {
         font-size: $font-size-lg;
         line-height: 1.6;
-        margin-bottom: $spacing-xl;
+        margin-bottom: $space-xl;
         opacity: 0.9;
-      }
-
-      .wishlist-btn {
-        background: $primary-color;
-        color: white;
-        border: none;
-        padding: $spacing-md $spacing-xl;
-        border-radius: $border-radius;
-        font-size: $font-size-lg;
-        font-weight: 600;
-        cursor: pointer;
-        transition: $transition-base;
-
-        &:hover {
-          background: color.adjust($primary-color, $lightness: -10%);
-          transform: translateY(-2px);
-        }
       }
     }
   }

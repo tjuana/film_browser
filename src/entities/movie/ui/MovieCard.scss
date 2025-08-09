@@ -48,14 +48,19 @@
     border-radius: $radius-sm;
     font-size: $font-size-sm;
     font-weight: 600;
-    color: #fff;
+    color: $color-text-on-primary; // use text-on-primary token
     background: $color-primary;
 
     &--rating {
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(
+        0,
+        0,
+        0,
+        0.85
+      ); // dark overlay for rating; keeps contrast with $color-text
     }
     &--adult {
-      background: $danger-color;
+      background: $color-danger; // use current token instead of legacy
     }
   }
 
@@ -64,7 +69,7 @@
   }
 
   &__title {
-    margin: 0 0 4px;
+    margin: 0 0 $space-2xs; // replace 4px ≈ $space-2xs (2px); closest available
     font-weight: 700;
     line-height: 1.2;
     display: -webkit-box;
@@ -74,12 +79,12 @@
     box-orient: vertical;
     overflow: hidden;
     text-align: left;
-    min-height: calc(3 * 1.2em + 6px);
+    min-height: calc(3 * 1.2em + $space-xs); // 6px ≈ $space-xs (4px); closest
   }
 
   &__meta {
     display: flex;
-    gap: 8px;
+    gap: $space-sm; // 8px → $space-sm (8px exact)
     align-items: baseline;
     opacity: 0.85;
     font-size: $font-size-sm;

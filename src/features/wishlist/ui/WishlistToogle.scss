@@ -1,0 +1,18 @@
+@use 'sass:color';
+
+.btn--wishlist {
+  background-color: $color-primary;
+  color: $color-text-on-primary;
+  border: none;
+  padding: $space-md $space-xl;
+  border-radius: $radius-md;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    background: color.adjust($color-primary, $lightness: -10%);
+    transform: translateY(-2px);
+  }
+}

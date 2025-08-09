@@ -1,19 +1,17 @@
-@use '@shared/styles/variables' as *;
-
 .home-page {
   min-height: 100vh;
   background: none;
-  padding: 1rem 0;
+  padding: $space-md 0;
 
   .home-header {
-    padding: $spacing-lg 0;
+    padding: $space-lg 0;
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: $spacing-xl;
+    gap: $space-md;
+    border-bottom: 1px solid rgba($color-text, 0.1);
+    margin-bottom: $space-xl;
 
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: $bp-md) {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -21,14 +19,14 @@
     }
 
     h1 {
-      color: white;
+      color: $color-text;
       margin: 0;
-      font-size: 2rem;
+      font-size: $font-size-2xl;
       font-weight: 700;
       text-align: center;
 
-      @media (min-width: $breakpoint-md) {
-        font-size: 2.5rem;
+      @media (min-width: $bp-md) {
+        font-size: $font-size-3xl;
         text-align: left;
       }
     }
@@ -36,29 +34,29 @@
     .main-nav {
       display: flex;
       justify-content: center;
-      gap: $spacing-md;
+      gap: $space-md;
 
-      @media (min-width: $breakpoint-md) {
-        gap: $spacing-lg;
+      @media (min-width: $bp-md) {
+        gap: $space-lg;
       }
 
       .nav-link {
-        color: rgba(255, 255, 255, 0.8);
+        color: $color-text-muted;
         text-decoration: none;
-        padding: $spacing-sm $spacing-md;
-        border-radius: $border-radius;
+        padding: $space-sm $space-md;
+        border-radius: $radius-md;
         transition: $transition-base;
         font-weight: 500;
         font-size: $font-size-sm;
 
-        @media (min-width: $breakpoint-md) {
+        @media (min-width: $bp-md) {
           font-size: $font-size-base;
         }
 
         &:hover,
         &.active {
-          color: white;
-          background: rgba(255, 255, 255, 0.1);
+          color: $color-text;
+          background: rgba($color-text, 0.1);
         }
       }
     }
@@ -66,21 +64,21 @@
 
   .home-content {
     .carousel-section {
-      margin-bottom: $spacing-xl;
+      margin-bottom: $space-lg;
 
-      @media (min-width: $breakpoint-md) {
-        margin-bottom: $spacing-xl * 2;
+      @media (min-width: $bp-md) {
+        margin-bottom: $space-xl * 2;
       }
 
       h2 {
-        color: white;
-        margin-bottom: $spacing-lg;
-        font-size: 1.5rem;
+        color: $color-text;
+        margin-bottom: $space-lg;
+        font-size: $font-size-xl;
         font-weight: 600;
         text-align: center;
 
-        @media (min-width: $breakpoint-md) {
-          font-size: 1.75rem;
+        @media (min-width: $bp-md) {
+          font-size: $font-size-2xl;
           text-align: left;
         }
       }

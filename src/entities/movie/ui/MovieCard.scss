@@ -1,7 +1,7 @@
 .movie-card {
   display: block;
   color: $color-text;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba($color-text, 0.06);
   border-radius: $radius-lg;
   overflow: hidden;
   transition: $transition-base;
@@ -48,19 +48,14 @@
     border-radius: $radius-sm;
     font-size: $font-size-sm;
     font-weight: 600;
-    color: $color-text-on-primary; // use text-on-primary token
+    color: $color-text-on-primary;
     background: $color-primary;
 
     &--rating {
-      background: rgba(
-        0,
-        0,
-        0,
-        0.85
-      ); // dark overlay for rating; keeps contrast with $color-text
+      background: rgba($color-surface, 0.85);
     }
     &--adult {
-      background: $color-danger; // use current token instead of legacy
+      background: $color-danger;
     }
   }
 
@@ -69,7 +64,7 @@
   }
 
   &__title {
-    margin: 0 0 $space-2xs; // replace 4px ≈ $space-2xs (2px); closest available
+    margin: 0 0 $space-2xs;
     font-weight: 700;
     line-height: 1.2;
     display: -webkit-box;
@@ -79,7 +74,7 @@
     box-orient: vertical;
     overflow: hidden;
     text-align: left;
-    min-height: calc(3 * 1.2em + $space-xs); // 6px ≈ $space-xs (4px); closest
+    min-height: calc(3 * 1.2em + $space-xs);
   }
 
   &__meta {

@@ -4,10 +4,7 @@
 
 .carousel__track {
   display: flex;
-  gap: var(
-    --gap,
-    $space-sm
-  ); // 12px ≈ $space-sm (8px); keeping var fallback to token for consistency
+  gap: var(--gap, $space-sm);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -15,8 +12,8 @@
   mask-image: linear-gradient(
     to right,
     transparent,
-    rgba(0, 0, 0, 1) 24px,
-    rgba(0, 0, 0, 1) calc(100% - 24px),
+    rgba($color-surface, 1) $space-lg,
+    rgba($color-surface, 1) calc(100% - #{$space-lg}),
     transparent
   );
   user-select: none;
@@ -28,7 +25,7 @@
 
 .carousel__item {
   flex: 0 0 auto;
-  width: 180px;
+  width: 11.25rem;
   scroll-snap-align: start;
 }
 
@@ -36,15 +33,15 @@
   position: absolute;
   top: 50%;
   translate: 0 -50%;
-  inline-size: 2.25rem;
-  block-size: 2.25rem;
-  border-radius: 999px;
+  inline-size: $space-xl;
+  block-size: $space-xl;
+  border-radius: 50%;
   display: grid;
   place-items: center;
   backdrop-filter: saturate(120%) blur(6px);
-  background: rgba($color-text, 0.1); // token-based alpha
-  color: $color-text; // token for text
-  border: 1px solid rgba($color-text, 0.2); // token-based alpha
+  background: rgba($color-text, 0.1);
+  color: $color-text;
+  border: 1px solid rgba($color-text, 0.2);
   opacity: 0;
   pointer-events: none;
   transition: $transition-base;
@@ -63,10 +60,10 @@
 }
 
 .carousel__btn--prev {
-  inset-inline-start: 0.25rem;
+  inset-inline-start: $space-xs;
 }
 .carousel__btn--next {
-  inset-inline-end: 0.25rem;
+  inset-inline-end: $space-xs;
 }
 
 @media (hover: none) {

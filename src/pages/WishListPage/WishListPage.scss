@@ -2,7 +2,7 @@
   min-height: 100vh;
   padding: $space-lg 0;
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: $bp-md) {
     padding: $space-xl 0;
   }
 }
@@ -10,7 +10,7 @@
 .wishlist-header {
   margin-bottom: $space-lg;
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: $bp-md) {
     margin-bottom: $space-xl;
   }
 
@@ -34,7 +34,7 @@
     font-weight: 700;
     text-align: center;
 
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: $bp-md) {
       font-size: $font-size-3xl;
       text-align: left;
     }

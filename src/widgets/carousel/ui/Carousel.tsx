@@ -4,13 +4,7 @@ import '@widgets/carousel/styles/_carousel.scss';
 import { MovieCard } from '@entities/movie/ui/MovieCard';
 import { useCarouselNav } from '@widgets/carousel/model/useCarouselNav';
 import { useCarouselDrag } from '@widgets/carousel/model/useCarouselDrag';
-
-export type MovieBrief = {
-  id: string | number;
-  title: string;
-  posterPath?: string;
-  rating?: number;
-};
+import type { MovieBrief } from '@entities/movie/api/types';
 
 type CarouselProps = {
   title: string;
@@ -42,8 +36,12 @@ export const Carousel = ({ title, items, renderItem }: CarouselProps) => {
               <MovieCard
                 id={m.id}
                 title={m.title}
-                posterPath={m.posterPath}
-                rating={m.rating}
+                posterUrl={m.posterPath}
+                voteAverage={m.voteAverage}
+                isAdult={m.isAdult}
+                releaseDate={m.releaseDate}
+                originalTitle={m.originalTitle}
+                ratio="poster" // для карусели 2:3; квадрат — ratio="square"
               />
             )}
           </CarouselItem>

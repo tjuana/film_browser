@@ -12,6 +12,9 @@ export const mapBrief = (m: TmdbMovie): MovieBrief => ({
   title: m.title ?? m.name ?? '',
   posterPath: imageUrl('w342', m.poster_path),
   voteAverage: m.vote_average,
+  releaseDate: m.release_date,
+  isAdult: m.adult,
+  originalTitle: m.original_title,
 });
 
 export const mapMovie = (m: TmdbMovie): Movie => ({

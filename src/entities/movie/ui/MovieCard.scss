@@ -1,49 +1,101 @@
 @use '@shared/styles/_variables' as *;
+@use '@shared/styles/_mixins' as mix;
 
 .movie-card {
   display: block;
-  text-decoration: none;
   color: $color-text;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: $radius-lg;
   overflow: hidden;
   transition: $transition-base;
-  backdrop-filter: blur(8px);
+  text-decoration: none;
   outline: none;
 
   &:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.12);
   }
-
   &:focus-visible {
-    box-shadow: 0 0 0 2px $color-accent inset;
+    @include mix.focus-ring;
   }
-}
 
-.movie-poster {
-  position: relative;
-  aspect-ratio: 1 / 1;
-
-  img {
+  &__poster {
+    position: relative;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    aspect-ratio: 1 / 1; // default square
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .movie-card__badges {
+      position: absolute;
+      inset: $space-sm $space-sm auto $space-sm;
+      display: flex;
+      justify-content: space-between;
+      gap: $space-sm;
+      pointer-events: none;
+    }
   }
-}
 
-.movie-rating {
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: $radius-sm;
-  font-size: $font-size-sm;
-}
+  &--poster .movie-card__poster {
+    aspect-ratio: 2 / 3;
+  }
 
-.movie-title {
-  margin: 0;
-  padding: $space-sm $space-md;
-  font-weight: 600;
-  text-align: center;
+  .badge {
+    pointer-events: none;
+    padding: $space-2xs $space-sm;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.75);
+
+    &--rating {
+      background: rgba(0, 0, 0, 0.85);
+    }
+    &--adult {
+      background: $danger-color;
+    }
+  }
+
+  &__body {
+    padding: $space-sm $space-md;
+  }
+
+  &__title {
+    margin: 0 0 4px;
+    font-weight: 700;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+    overflow: hidden;
+    text-align: left;
+    min-height: calc(3 * 1.2em + 6px);
+  }
+
+  &__meta {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    opacity: 0.85;
+    font-size: $font-size-sm;
+
+    .meta__year {
+      font-variant-numeric: tabular-nums;
+    }
+    .meta__original {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      opacity: 0.9;
+    }
+  }
 }

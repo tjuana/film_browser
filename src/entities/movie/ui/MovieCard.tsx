@@ -1,40 +1,88 @@
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 import './MovieCard.scss';
 
-type MovieCardProps = {
-  id: string | number;
-  title: string;
-  posterPath?: string;
-  rating?: number;
+export type MovieCardProps = {
+  id: number;
+  title?: string;
+  originalTitle?: string;
+  posterUrl?: string;
+  voteAverage?: number;
+  isAdult?: boolean;
+  releaseDate?: string;
+  to?: string;
+  ratio?: 'poster' | 'square';
+  className?: string;
 };
 
-export const MovieCard = ({
+const yearOf = (d?: string) => (d && d.length >= 4 ? d.slice(0, 4) : undefined);
+
+export function MovieCard({
   id,
   title,
-  posterPath,
-  rating,
-}: MovieCardProps) => {
+  originalTitle,
+  posterUrl,
+  voteAverage,
+  isAdult,
+  releaseDate,
+  to = `/movie/${id}`,
+  ratio = 'poster',
+  className,
+}: MovieCardProps) {
+  const displayTitle = title ?? originalTitle ?? 'Untitled';
+  const showOriginal = Boolean(originalTitle && originalTitle !== displayTitle);
+  const year = yearOf(releaseDate);
+
+  const aria = [
+    displayTitle,
+    year ? `, ${year}` : '',
+    typeof voteAverage === 'number' ? `, rating ${voteAverage.toFixed(1)}` : '',
+    isAdult ? ', 18 plus' : '',
+  ].join('');
+
+  const Root: React.ElementType = to ? Link : 'div';
+  const rootProps = to ? { to } : { role: 'article', tabIndex: 0 };
+
   return (
-    <Link to={`/movie/${id}`} className="movie-card">
-      <div
-        className="movie-poster"
-        style={{ aspectRatio: '1 / 1', position: 'relative' }}
-      >
+    <Root
+      {...rootProps}
+      className={clsx('movie-card', `movie-card--${ratio}`, className)}
+      aria-label={aria}
+      title={displayTitle}
+    >
+      <div className="movie-card__poster">
         <img
-          src={posterPath}
-          alt={title}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          src={posterUrl ?? '/assets/no-poster.png'}
+          alt={displayTitle}
+          loading="lazy"
+          decoding="async"
         />
-        {typeof rating === 'number' && (
-          <div
-            className="movie-rating"
-            style={{ position: 'absolute', top: 6, right: 6 }}
-          >
-            ★ {rating}
-          </div>
-        )}
+        <div className="movie-card__badges" aria-hidden="true">
+          {isAdult && <span className="badge badge--adult">18+</span>}
+          {typeof voteAverage === 'number' && (
+            <span className="badge badge--rating">
+              ★ {voteAverage.toFixed(1)}
+            </span>
+          )}
+        </div>
+        <div className="movie-card__fade" aria-hidden="true" />
       </div>
-      <h3 className="movie-title">{title}</h3>
-    </Link>
+
+      <div className="movie-card__body">
+        <div className="movie-card__title">{displayTitle}</div>
+
+        <div className="movie-card__meta">
+          {year && <span className="meta__chip">{year}</span>}
+          {showOriginal && (
+            <>
+              {year && <span className="meta__sep">•</span>}
+              <span className="meta__original" title={originalTitle!}>
+                {originalTitle}
+              </span>
+            </>
+          )}
+        </div>
+      </div>
+    </Root>
   );
-};
+}

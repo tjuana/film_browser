@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+# Film Browser
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a WIP refactor aligned to Feature-Sliced Design (FSD). See CODE_REVIEW.md for context.
 
 Currently, two official plugins are available:
 

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RootLayout } from '@app/layouts/RootLayout';
 
 // Pages
 import { HomePage } from '@pages/HomePage';
@@ -10,7 +11,7 @@ import { WishListPage } from '@pages/WishListPage';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      staleTime: 1000 * 60 * 5,
       retry: 1,
     },
   },
@@ -20,13 +21,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <div className="app">
-          <Routes>
+        <Routes>
+          <Route element={<RootLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/movie/:id" element={<MovieDetailPage />} />
             <Route path="/wishlist" element={<WishListPage />} />
-          </Routes>
-        </div>
+          </Route>
+        </Routes>
       </Router>
     </QueryClientProvider>
   );

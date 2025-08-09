@@ -3,7 +3,7 @@ import * as env from '@shared/config/env';
 import { createMoviesService } from '@entities/movie/api/factory';
 
 describe('factory', () => {
-  const getHasKey = () => vi.spyOn(env, 'hasTmdbKey');
+  const getHasKey = () => vi.spyOn(env, 'hasTmdb');
 
   afterEach(() => vi.restoreAllMocks());
 

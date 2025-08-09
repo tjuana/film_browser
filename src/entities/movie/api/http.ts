@@ -1,10 +1,8 @@
 import axios, { type AxiosInstance } from 'axios';
-import { TMDB_KEY } from '@shared/config/env';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
+import { TMDB_KEY, TMDB_API_BASE } from '@shared/config/env';
 
 export const createHttpClient = (): AxiosInstance => {
-  const client = axios.create({ baseURL: BASE_URL });
+  const client = axios.create({ baseURL: TMDB_API_BASE });
   client.interceptors.request.use((config) => {
     const params = new URLSearchParams(
       config.params as unknown as Record<string, string>

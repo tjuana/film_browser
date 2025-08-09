@@ -1,10 +1,11 @@
 import type { Movie, MovieBrief, TmdbMovie } from './types';
+import { TMDB_IMAGE_BASE } from '@shared/config/env';
 
 export const imageUrl = (
   size: string,
   path?: string | null
 ): string | undefined =>
-  path ? `https://image.tmdb.org/t/p/${size}${path}` : undefined;
+  path ? `${TMDB_IMAGE_BASE}/${size}${path}` : undefined;
 
 export const mapBrief = (m: TmdbMovie): MovieBrief => ({
   id: m.id,

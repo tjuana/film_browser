@@ -1,178 +1,44 @@
 @use '@shared/styles/variables' as *;
-@use 'sass:color';
 
 .wishlist-page {
   min-height: 100vh;
-  background: none;
-  padding: $spacing-lg 0;
+  padding: $space-lg 0;
 
   @media (min-width: $breakpoint-md) {
-    padding: $spacing-xl 0;
+    padding: $space-xl 0;
+  }
+}
+
+.wishlist-header {
+  margin-bottom: $space-lg;
+
+  @media (min-width: $breakpoint-md) {
+    margin-bottom: $space-xl;
   }
 
-  .wishlist-header {
-    margin-bottom: $spacing-lg;
+  .back-link {
+    display: inline-block;
+    color: $color-text-muted;
+    text-decoration: none;
+    margin-bottom: $space-md;
+    font-weight: 500;
+    transition: $transition-base;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
+  h1 {
+    color: $color-text;
+    margin: 0;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    text-align: center;
 
     @media (min-width: $breakpoint-md) {
-      margin-bottom: $spacing-xl;
-    }
-
-    .back-link {
-      display: inline-block;
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      margin-bottom: $spacing-md;
-      font-weight: 500;
-      transition: $transition-base;
-
-      &:hover {
-        color: white;
-      }
-    }
-
-    h1 {
-      color: white;
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-
-      @media (min-width: $breakpoint-md) {
-        font-size: 2.5rem;
-        text-align: left;
-      }
-    }
-  }
-
-  .wishlist-content {
-    .empty-wishlist {
-      text-align: center;
-      color: white;
-
-      p {
-        font-size: $font-size-base;
-        margin-bottom: $spacing-lg;
-        opacity: 0.8;
-
-        @media (min-width: $breakpoint-md) {
-          font-size: $font-size-lg;
-        }
-      }
-
-      .browse-link {
-        display: inline-block;
-        background: $primary-color;
-        color: white;
-        text-decoration: none;
-        padding: $spacing-sm $spacing-lg;
-        border-radius: $border-radius;
-        font-weight: 600;
-        transition: $transition-base;
-        font-size: $font-size-sm;
-
-        @media (min-width: $breakpoint-md) {
-          padding: $spacing-md $spacing-xl;
-          font-size: $font-size-base;
-        }
-
-        &:hover {
-          background: color.adjust($primary-color, $lightness: -10%);
-          transform: translateY(-2px);
-        }
-      }
-    }
-
-    .wishlist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: $spacing-md;
-
-      @media (min-width: $breakpoint-sm) {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: $spacing-lg;
-      }
-
-      @media (min-width: $breakpoint-md) {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      }
-
-      @media (min-width: $breakpoint-lg) {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      }
-
-      .wishlist-item {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: $border-radius-lg;
-        overflow: hidden;
-        transition: $transition-base;
-        backdrop-filter: blur(10px);
-
-        &:hover {
-          transform: translateY(-4px);
-          box-shadow: $box-shadow-lg;
-          background: rgba(255, 255, 255, 0.15);
-        }
-
-        a {
-          display: block;
-          text-decoration: none;
-          color: inherit;
-
-          img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-
-            @media (min-width: $breakpoint-sm) {
-              height: 240px;
-            }
-
-            @media (min-width: $breakpoint-md) {
-              height: 270px;
-            }
-
-            @media (min-width: $breakpoint-lg) {
-              height: 300px;
-            }
-          }
-
-          h3 {
-            padding: $spacing-sm;
-            margin: 0;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: white;
-            text-align: center;
-            line-height: 1.3;
-
-            @media (min-width: $breakpoint-md) {
-              padding: $spacing-md;
-              font-size: $font-size-base;
-            }
-          }
-        }
-
-        .remove-btn {
-          width: 100%;
-          background: $danger-color;
-          color: white;
-          border: none;
-          padding: $spacing-xs;
-          font-size: 0.75rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: $transition-base;
-
-          @media (min-width: $breakpoint-md) {
-            padding: $spacing-sm;
-            font-size: $font-size-sm;
-          }
-
-          &:hover {
-            background: color.adjust($danger-color, $lightness: -10%);
-          }
-        }
-      }
+      font-size: $font-size-3xl;
+      text-align: left;
     }
   }
 }

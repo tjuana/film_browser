@@ -27,6 +27,8 @@ $font-size-sm: 0.875rem;
 $font-size-base: 1rem;
 $font-size-lg: 1.25rem;
 $font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+$font-size-3xl: 2.5rem;
 $line-height-base: 1.5;
 
 // Spacing scale
@@ -104,3 +106,6 @@ $box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 // $transition-base already defined; keep semantic equivalents
 
 $shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+$color-text-on-primary: #fff;
+$color-text-on-danger: #fff;
+$color-surface-variant: #1e293b;

@@ -20,4 +20,15 @@ export default defineConfig({
     css: true,
     restoreMocks: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Делает токены и миксины видимыми во ВСЕХ .scss без ручного @use
+        additionalData: `
+          @use "@shared/styles/_variables.scss" as *;
+          @use "@shared/styles/_mixins.scss" as mix;
+        `,
+      },
+    },
+  },
 });

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { yearOf } from '@shared/lib/date/yearOf';
 import './MovieCard.scss';
 
 export type MovieCardProps = {
@@ -14,8 +15,6 @@ export type MovieCardProps = {
   ratio?: 'poster' | 'square';
   className?: string;
 };
-
-const yearOf = (d?: string) => (d && d.length >= 4 ? d.slice(0, 4) : undefined);
 
 export function MovieCard({
   id,

@@ -18,6 +18,7 @@
     #000 calc(100% - 24px),
     transparent
   );
+  user-select: none;
 }
 
 .carousel__track::-webkit-scrollbar {

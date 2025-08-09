@@ -3,6 +3,7 @@ import { CarouselItem } from './CarouselItem';
 import '@widgets/carousel/styles/_carousel.scss';
 import { MovieCard } from '@entities/movie/ui/MovieCard';
 import { useCarouselNav } from '@widgets/carousel/model/useCarouselNav';
+import { useCarouselDrag } from '@widgets/carousel/model/useCarouselDrag';
 
 type DemoMovie = {
   id: string;
@@ -18,6 +19,7 @@ type CarouselProps = {
 
 export const Carousel = ({ title, items }: CarouselProps) => {
   const { trackRef, canPrev, canNext, scrollByPage } = useCarouselNav();
+  useCarouselDrag(trackRef);
 
   return (
     <section className="carousel" aria-label={title}>

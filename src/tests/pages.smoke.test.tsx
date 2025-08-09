@@ -3,10 +3,16 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { HomePage } from '@pages/HomePage';
 import { WishListPage } from '@pages/WishListPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const renderWithQuery = (ui: React.ReactNode) => {
+  const qc = new QueryClient();
+  return render(<QueryClientProvider client={qc}>{ui}</QueryClientProvider>);
+};
 
 describe('pages smoke', () => {
   it('home renders heading', () => {
-    render(
+    renderWithQuery(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -19,7 +25,7 @@ describe('pages smoke', () => {
   });
 
   it('wishlist renders heading', () => {
-    render(
+    renderWithQuery(
       <MemoryRouter initialEntries={['/wishlist']}>
         <Routes>
           <Route path="/wishlist" element={<WishListPage />} />

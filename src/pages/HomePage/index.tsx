@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Carousel } from '@widgets/carousel';
-import { popularMocks, topRatedMocks, upcomingMocks } from './mocks';
+import { MoviesCarousel } from '@features/movies-carousel';
 import './HomePage.scss';
 
 export const HomePage = () => {
@@ -19,20 +18,11 @@ export const HomePage = () => {
       </header>
 
       <div className="home-content">
-        <section className="carousel-section">
-          <h2>Popular Movies</h2>
-          <Carousel title="Popular Movies" items={popularMocks} />
-        </section>
+        <MoviesCarousel title="Popular Movies" category="popular" />
 
-        <section className="carousel-section">
-          <h2>Top Rated Movies</h2>
-          <Carousel title="Top Rated Movies" items={topRatedMocks} />
-        </section>
+        <MoviesCarousel title="Top Rated Movies" category="topRated" />
 
-        <section className="carousel-section">
-          <h2>Upcoming Movies</h2>
-          <Carousel title="Upcoming Movies" items={upcomingMocks} />
-        </section>
+        <MoviesCarousel title="Upcoming Movies" category="upcoming" />
       </div>
     </div>
   );

@@ -1,22 +1,12 @@
 import { Link } from 'react-router-dom';
 import './WishListPage.scss';
+import { useWishlistStore } from '@features/wishlist/model/store';
+import { MovieCard } from '@entities/movie/ui/MovieCard';
 
 export const WishListPage = () => {
-  // Mock data for now
-  const wishlistItems = [
-    {
-      id: '1',
-      title: 'Sample Movie 1',
-      posterPath: 'https://via.placeholder.com/200x300',
-      category: 'popular' as const,
-    },
-    {
-      id: '2',
-      title: 'Sample Movie 2',
-      posterPath: 'https://via.placeholder.com/200x300',
-      category: 'top-rated' as const,
-    },
-  ];
+  const items = useWishlistStore((s) => s.items);
+  const remove = useWishlistStore((s) => s.remove);
+  const clear = useWishlistStore((s) => s.clear);
 
   return (
     <div className="wishlist-page">
@@ -28,7 +18,7 @@ export const WishListPage = () => {
       </header>
 
       <div className="wishlist-content">
-        {wishlistItems.length === 0 ? (
+        {items.length === 0 ? (
           <div className="empty-wishlist">
             <p>Your wish list is empty.</p>
             <Link to="/" className="browse-link">
@@ -37,15 +27,24 @@ export const WishListPage = () => {
           </div>
         ) : (
           <div className="wishlist-grid">
-            {wishlistItems.map((movie) => (
-              <div key={movie.id} className="wishlist-item">
-                <Link to={`/movie/${movie.id}`}>
-                  <img src={movie.posterPath} alt={movie.title} />
-                  <h3>{movie.title}</h3>
-                </Link>
-                <button className="remove-btn">Remove</button>
+            {items.map((m) => (
+              <div key={m.id} className="wishlist-item">
+                <MovieCard
+                  id={m.id as number}
+                  title={m.title}
+                  posterUrl={m.posterPath}
+                  ratio="poster"
+                />
+                <button className="remove-btn" onClick={() => remove(m.id)}>
+                  Remove
+                </button>
               </div>
             ))}
+            <div className="wishlist-actions">
+              <button className="remove-btn" onClick={() => clear()}>
+                Clear all
+              </button>
+            </div>
           </div>
         )}
       </div>

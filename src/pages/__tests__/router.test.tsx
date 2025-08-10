@@ -1,35 +1,72 @@
-import { describe, it, expect } from 'vitest';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { describe, it, expect, vi } from 'vitest';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { HomePage } from '@pages/HomePage';
 import { WishListPage } from '@pages/WishListPage';
 import { RootLayout } from '@app/layouts/RootLayout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ROUTES } from '@app/router/routes';
 
-const renderWithQuery = (ui: React.ReactNode) => {
-  const qc = new QueryClient();
-  return render(<QueryClientProvider client={qc}>{ui}</QueryClientProvider>);
+// Mock the movies service for the loaders
+vi.mock('@features/movies/api/factory', () => ({
+  createMoviesService: () => ({
+    getPopular: vi
+      .fn()
+      .mockResolvedValue([
+        { id: 1, title: 'Popular Movie', posterPath: '/popular.jpg' },
+      ]),
+    getTopRated: vi
+      .fn()
+      .mockResolvedValue([
+        { id: 2, title: 'Top Movie', posterPath: '/top.jpg' },
+      ]),
+    getUpcoming: vi
+      .fn()
+      .mockResolvedValue([
+        { id: 3, title: 'Upcoming Movie', posterPath: '/upcoming.jpg' },
+      ]),
+  }),
+}));
+
+const createTestRouter = (initialEntries: string[]) => {
+  return createMemoryRouter(
+    [
+      {
+        path: '/',
+        element: <RootLayout />,
+        children: [
+          {
+            path: ROUTES.HOME,
+            element: <HomePage />,
+            loader: async () => ({
+              popular: [
+                { id: 1, title: 'Popular Movie', posterPath: '/popular.jpg' },
+              ],
+              topRated: [{ id: 2, title: 'Top Movie', posterPath: '/top.jpg' }],
+              upcoming: [
+                { id: 3, title: 'Upcoming Movie', posterPath: '/upcoming.jpg' },
+              ],
+            }),
+          },
+          {
+            path: ROUTES.WISHLIST,
+            element: <WishListPage />,
+          },
+        ],
+      },
+    ],
+    {
+      initialEntries,
+    }
+  );
 };
 
 describe('router', () => {
-  it('renders home', () => {
-    renderWithQuery(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <RootLayout>
-                <HomePage />
-              </RootLayout>
-            }
-          />
-        </Routes>
-      </MemoryRouter>
-    );
+  it('renders home', async () => {
+    const router = createTestRouter(['/']);
+    render(<RouterProvider router={router} />);
 
     expect(
-      screen.getByRole('heading', { name: /film browser/i })
+      await screen.findByRole('heading', { name: /film browser/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: /wish list/i })
@@ -37,17 +74,12 @@ describe('router', () => {
     expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument();
   });
 
-  it('renders wishlist', () => {
-    renderWithQuery(
-      <MemoryRouter initialEntries={['/wishlist']}>
-        <Routes>
-          <Route path="/wishlist" element={<WishListPage />} />
-        </Routes>
-      </MemoryRouter>
-    );
+  it('renders wishlist', async () => {
+    const router = createTestRouter(['/wishlist']);
+    render(<RouterProvider router={router} />);
 
     expect(
-      screen.getByRole('heading', { name: /my wish list/i })
+      await screen.findByRole('heading', { name: /my wish list/i })
     ).toBeInTheDocument();
   });
 });

@@ -11,7 +11,7 @@
 export function getYear(
   input?: string | Date | number | null
 ): string | undefined {
-  if (!input) return undefined;
+  if (input === null || input === undefined || input === '') return undefined;
 
   try {
     // Handle simple year string (4 digits)

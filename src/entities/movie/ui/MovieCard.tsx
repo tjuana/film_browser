@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { yearOf } from '@shared/lib/date/yearOf';
+import { getYear } from '@shared/lib/date';
 import { ROUTES } from '@app/router/routes';
 import './MovieCard.scss';
 
@@ -39,7 +39,7 @@ export function MovieCard({
   const finalTo = to ?? defaultTo;
   const displayTitle = title ?? originalTitle ?? 'Untitled';
   const showOriginal = Boolean(originalTitle && originalTitle !== displayTitle);
-  const year = yearOf(releaseDate);
+  const year = getYear(releaseDate);
 
   const aria = [
     displayTitle,

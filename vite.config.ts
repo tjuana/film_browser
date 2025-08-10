@@ -14,9 +14,9 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'jsdom', // дает document/window
+    environment: 'jsdom',
     globals: true,
-    setupFiles: './src/setup.ts', // jest-dom и моки
+    setupFiles: './src/setup.ts',
     css: true,
     restoreMocks: true,
     include: ['src/**/*.test.{ts,tsx}'],
@@ -24,7 +24,6 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // Делает токены и миксины видимыми во ВСЕХ .scss без ручного @use
         additionalData: `
           @use "@shared/styles/_variables.scss" as *;
           @use "@shared/styles/_mixins.scss" as mix;

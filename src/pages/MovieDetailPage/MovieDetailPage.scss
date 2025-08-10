@@ -1,78 +1,13 @@
-@use 'sass:color';
+@use '@shared/styles/_variables' as *;
 
 .movie-detail-page {
   min-height: 100vh;
-  background: none;
-  padding: $space-xl 0;
+  padding: $space-lg 0;
 
-  .detail-header {
-    margin-bottom: $space-xl;
-
-    .back-link {
-      display: inline-block;
-      color: $color-text-muted;
-      text-decoration: none;
-      margin-bottom: $space-md;
-      font-weight: $font-weight-medium;
-      transition: $transition-base;
-
-      &:hover {
-        color: $color-text;
-      }
-    }
-
-    h1 {
-      color: $color-text;
-      margin: 0;
-      font-size: $font-size-3xl;
-      font-weight: 700;
-    }
-  }
-
-  .detail-content {
-    display: grid;
-    grid-template-columns: minmax(18.75rem, 1fr) 2fr;
-    gap: $space-xl;
-    align-items: start;
-
-    @media (max-width: $bp-md) {
-      grid-template-columns: 1fr;
-      gap: $space-lg;
-    }
-
-    .movie-poster {
-      img {
-        width: 100%;
-        border-radius: $radius-lg;
-        box-shadow: $shadow-lg;
-      }
-    }
-
-    .movie-info {
-      color: $color-text;
-
-      .movie-meta {
-        display: flex;
-        gap: $space-lg;
-        margin-bottom: $space-lg;
-        font-size: $font-size-lg;
-
-        .release-date {
-          opacity: $opacity-lg;
-        }
-
-        .rating {
-          color: $color-warning;
-          font-weight: $font-weight-semibold;
-        }
-      }
-
-      .overview {
-        font-size: $font-size-lg;
-        line-height: 1.6;
-        margin-bottom: $space-xl;
-        opacity: $opacity-lg;
-      }
-    }
+  &__error {
+    text-align: center;
+    color: $color-danger;
+    font-size: $font-size-lg;
+    padding: $space-xl;
   }
 }

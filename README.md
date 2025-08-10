@@ -59,9 +59,8 @@ src/
 ### Key Technologies
 - **React 18** with TypeScript
 - **Vite** for build tooling
-- **React Router** for navigation
-- **TanStack Query** for data fetching
-- **Zustand** for state management
+- **React Router 7** with data APIs for SSR-ready navigation
+- **Zustand** for client-side state management
 - **SCSS** with design tokens
 - **Vitest** + React Testing Library
 
@@ -77,6 +76,41 @@ The project uses a **comprehensive design token system** with:
 
 **Token Usage**: 100% of defined tokens are actively used (58/58) ✅
 
+## 🚀 Modern Data Loading with React Router 7
+
+This application uses **React Router 7 data APIs** for improved data loading patterns:
+
+### Data Loading Architecture
+- **Route Loaders**: All external API data is fetched at the route level
+  - `src/app/routes/index.tsx` - Home page movie lists  
+  - `src/app/routes/movie.$id.tsx` - Individual movie details
+- **Component Props**: Pages and widgets receive data via props, not hooks
+- **No Client Fetching**: Zero `useQuery` or `useEffect` for API calls in components
+
+### How Data Flows
+1. **Route Loaders** (`loader` functions) fetch data during navigation
+2. **Pages** use `useLoaderData()` to access fetched data  
+3. **Widgets** receive data as props from pages
+4. **Client State** (wishlist) remains in Zustand for interactivity
+
+### Loader Locations
+```typescript
+// Route loaders handle external API calls
+src/app/routes/index.tsx        // Home: popular, top-rated, upcoming movies
+src/app/routes/movie.$id.tsx    // Movie details: single movie + category
+src/app/routes/wishlist.tsx     // Wishlist: no loader (uses Zustand)
+
+// Router configuration  
+src/app/router/router.tsx       // Centralized route + loader mapping
+```
+
+### Benefits
+- **Better UX**: Data loads during navigation, not after
+- **No Loading States**: Content available when route renders
+- **Cleaner Architecture**: Centralized data fetching in loaders  
+- **Improved Performance**: Parallel data fetching during navigation
+- **Future-Proof**: Compatible with SSR if needed later
+
 ## 🧪 Testing
 
 Comprehensive test coverage includes:
@@ -85,7 +119,7 @@ Comprehensive test coverage includes:
 - **Accessibility Tests**: Screen reader and keyboard navigation
 - **Router Tests**: Navigation and route handling
 
-**Current Status**: 122/122 tests passing ✅
+**Current Status**: 199/199 tests passing ✅
 
 ## 📁 Project Structure
 
@@ -130,6 +164,6 @@ Comprehensive test coverage includes:
 
 ---
 
-**Tech Stack**: React • TypeScript • Vite • SCSS • Zustand • TanStack Query • Vitest  
-**Architecture**: Feature-Sliced Design (FSD)  
+**Tech Stack**: React • TypeScript • Vite • React Router 7 • SCSS • Zustand • Vitest  
+**Architecture**: Feature-Sliced Design (FSD) • Modern Data Loading with Route Loaders  
 **API**: The Movie Database (TMDB)

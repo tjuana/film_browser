@@ -1,17 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MoviesCarousel } from '@features/movies-carousel';
 import { MemoryRouter } from 'react-router-dom';
 import type { MovieBrief } from '@entities/movie/model/types';
 
 const renderWithProviders = (ui: React.ReactNode) => {
-  const qc = new QueryClient();
-  return render(
-    <QueryClientProvider client={qc}>
-      <MemoryRouter>{ui}</MemoryRouter>
-    </QueryClientProvider>
-  );
+  return render(<MemoryRouter>{ui}</MemoryRouter>);
 };
 
 const mockMovies: MovieBrief[] = [

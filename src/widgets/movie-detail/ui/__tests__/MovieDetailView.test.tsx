@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MovieDetailView } from '../MovieDetailView';
 import type { Genre, Movie } from '@entities/movie/model/types';
 
@@ -93,18 +92,10 @@ const renderMovieDetailView = (
   movie: Movie,
   category?: 'popular' | 'top' | 'upcoming'
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-    },
-  });
-
   return render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <MovieDetailView movie={movie} category={category} />
-      </MemoryRouter>
-    </QueryClientProvider>
+    <MemoryRouter>
+      <MovieDetailView movie={movie} category={category} />
+    </MemoryRouter>
   );
 };
 

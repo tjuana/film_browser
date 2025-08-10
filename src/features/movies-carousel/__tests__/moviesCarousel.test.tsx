@@ -1,22 +1,9 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MoviesCarousel } from '@features/movies-carousel';
-
-// Mock the useMovies hook directly to control its behavior
-vi.mock('@features/movies-carousel/model/useMovies', () => ({
-  useMovies: vi.fn(),
-}));
-
-// Access the exported mock hook to configure per test
-type MockUseMovies = {
-  useMovies: ReturnType<typeof vi.fn>;
-};
-const { useMovies } = (await import(
-  '@features/movies-carousel/model/useMovies'
-)) as unknown as MockUseMovies;
 import { MemoryRouter } from 'react-router-dom';
+import type { MovieBrief } from '@entities/movie/model/types';
 
 const renderWithProviders = (ui: React.ReactNode) => {
   const qc = new QueryClient();
@@ -26,22 +13,29 @@ const renderWithProviders = (ui: React.ReactNode) => {
     </QueryClientProvider>
   );
 };
+
+const mockMovies: MovieBrief[] = [
+  {
+    id: 1,
+    title: 'Movie A',
+    posterPath: '/poster-a.jpg',
+    voteAverage: 8.5,
+    isAdult: false,
+    originalTitle: 'Movie A',
+  },
+  {
+    id: 2,
+    title: 'Movie B',
+    posterPath: '/poster-b.jpg',
+    voteAverage: 7.2,
+    isAdult: false,
+    originalTitle: 'Movie B',
+  },
+];
+
 describe('MoviesCarousel', () => {
-  beforeEach(() => {
-    vi.resetAllMocks();
-  });
-
-  it('renders items after loading', async () => {
-    useMovies.mockReturnValue({
-      data: [
-        { id: 1, title: 'A' },
-        { id: 2, title: 'B' },
-      ],
-      isLoading: false,
-      isError: false,
-    });
-
-    renderWithProviders(<MoviesCarousel title="Popular" category="popular" />);
+  it('renders items when movies provided', async () => {
+    renderWithProviders(<MoviesCarousel title="Popular" movies={mockMovies} />);
 
     // eventually list renders with items
     const list = await screen.findByRole('list');
@@ -49,25 +43,20 @@ describe('MoviesCarousel', () => {
     expect(screen.getAllByRole('listitem').length).toBe(2);
   });
 
-  it('shows error and retries', async () => {
-    const mockRefetch = vi.fn();
+  it('shows no movies message when empty array provided', () => {
+    renderWithProviders(<MoviesCarousel title="Popular" movies={[]} />);
 
-    useMovies.mockReturnValue({
-      data: undefined,
-      isLoading: false,
-      isError: true,
-      refetch: mockRefetch,
-    });
+    expect(screen.getByText('No movies available')).toBeInTheDocument();
+  });
 
-    renderWithProviders(<MoviesCarousel title="Popular" category="popular" />);
+  it('shows no movies message when movies is undefined', () => {
+    renderWithProviders(
+      <MoviesCarousel
+        title="Popular"
+        movies={undefined as unknown as MovieBrief[]}
+      />
+    );
 
-    // Error state should be visible immediately
-    expect(screen.getByText('Error loading movies')).toBeInTheDocument();
-
-    // Now click the retry button
-    await userEvent.click(screen.getByRole('button', { name: /retry/i }));
-
-    // Verify refetch was called
-    expect(mockRefetch).toHaveBeenCalled();
+    expect(screen.getByText('No movies available')).toBeInTheDocument();
   });
 });

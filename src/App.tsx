@@ -1,14 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RootLayout } from '@app/layouts/RootLayout';
-import { ROUTES } from '@app/router/routes';
+import { router } from '@app/router/router';
 
-// Pages
-import { HomePage } from '@pages/HomePage';
-import { MovieDetailPage } from '@pages/MovieDetailPage';
-import { WishListPage } from '@pages/WishListPage';
-
-// Create a client
+// Create a client (kept for wishlist Zustand persistence)
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -21,15 +15,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <Routes>
-          <Route element={<RootLayout />}>
-            <Route path={ROUTES.HOME} element={<HomePage />} />
-            <Route path={ROUTES.MOVIE_DETAIL} element={<MovieDetailPage />} />
-            <Route path={ROUTES.WISHLIST} element={<WishListPage />} />
-          </Route>
-        </Routes>
-      </Router>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

@@ -1,6 +1,6 @@
 .header {
   padding: $space-md 0;
-  border-bottom: 1px solid rgba($color-text, 0.1);
+  border-bottom: 1px solid rgba($color-text, $opacity-md);
   background-color: $color-surface;
 
   .main-nav {
@@ -32,7 +32,7 @@
       text-decoration: none;
       padding: $space-xs $space-sm;
       border-radius: $radius-md;
-      font-weight: 500;
+      font-weight: $font-weight-medium;
       font-size: $font-size-sm;
       transition: $transition-base;
 
@@ -44,7 +44,7 @@
       &:hover,
       &.active {
         color: $color-text;
-        background-color: rgba($color-text, 0.08);
+        background-color: rgba($color-text, $opacity-sm);
       }
     }
   }

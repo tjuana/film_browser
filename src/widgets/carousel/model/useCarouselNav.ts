@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
 type UseCarouselNav = () => {
   trackRef: React.RefObject<HTMLDivElement>;
@@ -9,77 +10,74 @@ type UseCarouselNav = () => {
 };
 
 const EPSILON = 1;
+const PAGE_FACTOR = 0.9; // Процент ширины контейнера, который скроллим за раз
+const FALLBACK_PAGE_WIDTH = 320; // Если ref ещё не смонтирован
 
 export const useCarouselNav: UseCarouselNav = () => {
   const trackRef = useRef<HTMLDivElement>(null!);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
-  const prefersReducedMotionRef = useRef(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  const pageAmount = useMemo(() => {
+  // Рассчитываем размер страницы
+  const getPageAmount = useCallback(() => {
     const el = trackRef.current;
-    return el ? Math.max(1, Math.floor(el.clientWidth * 0.9)) : 320;
+    return el
+      ? Math.max(1, Math.floor(el.clientWidth * PAGE_FACTOR))
+      : FALLBACK_PAGE_WIDTH;
   }, []);
 
+  // Обновляем состояния кнопок
   const updateState = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
+
     const { scrollLeft, scrollWidth, clientWidth } = el;
     const maxScrollLeft = scrollWidth - clientWidth - EPSILON;
+
     setCanPrev(scrollLeft > 0);
     setCanNext(scrollLeft < maxScrollLeft);
   }, []);
 
   const updateNow = updateState;
 
+  // Скролл на одну страницу
   const scrollByPage = useCallback(
     (direction: -1 | 1) => {
       const el = trackRef.current;
       if (!el) return;
-      const behavior = prefersReducedMotionRef.current ? 'auto' : 'smooth';
-      el.scrollBy({ left: pageAmount * direction, behavior });
+
+      el.scrollBy({
+        left: getPageAmount() * direction,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
     },
-    [pageAmount]
+    [getPageAmount, prefersReducedMotion]
   );
 
+  // Подписки на события
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+
     updateState();
 
     const onScroll = () => updateState();
     el.addEventListener('scroll', onScroll, { passive: true });
 
+    // ResizeObserver
     let ro: ResizeObserver | null = null;
     if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(() => updateState());
+      ro = new ResizeObserver(updateState);
       ro.observe(el);
     }
 
-    const onResize = () => updateState();
-    window.addEventListener('resize', onResize);
-
-    // prefers-reduced-motion listener
-    const mql =
-      typeof window !== 'undefined' && 'matchMedia' in window
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : null;
-    if (mql) {
-      prefersReducedMotionRef.current = mql.matches;
-      const onChange = () => {
-        prefersReducedMotionRef.current = mql.matches;
-      };
-      mql.addEventListener?.('change', onChange);
-      if ('addListener' in mql) {
-        // @ts-expect-error legacy Safari API present in older browsers
-        mql.addListener(onChange);
-      }
-    }
+    window.addEventListener('resize', updateState);
 
     return () => {
       el.removeEventListener('scroll', onScroll);
       ro?.disconnect();
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', updateState);
     };
   }, [updateState]);
 

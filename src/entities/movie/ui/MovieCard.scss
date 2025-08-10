@@ -1,7 +1,7 @@
 .movie-card {
   display: block;
   color: $color-text;
-  background: rgba($color-text, 0.06);
+  background: rgba($color-text, $opacity-xs);
   border-radius: $radius-lg;
   overflow: hidden;
   transition: $transition-base;
@@ -9,7 +9,7 @@
   outline: none;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-$space-xs);
   }
   &:focus-visible {
     @include mix.focus-ring;
@@ -47,12 +47,12 @@
     padding: $space-2xs $space-sm;
     border-radius: $radius-sm;
     font-size: $font-size-sm;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     color: $color-text-on-primary;
     background: $color-primary;
 
     &--rating {
-      background: rgba($color-surface, 0.85);
+      background: rgba($color-surface, $opacity-xl);
     }
     &--adult {
       background: $color-danger;
@@ -65,7 +65,7 @@
 
   &__title {
     margin: 0 0 $space-2xs;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     line-height: 1.2;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -79,9 +79,9 @@
 
   &__meta {
     display: flex;
-    gap: $space-sm; // 8px → $space-sm (8px exact)
+    gap: $space-sm;
     align-items: baseline;
-    opacity: 0.85;
+    opacity: $opacity-lg;
     font-size: $font-size-sm;
 
     .meta__year {
@@ -92,7 +92,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       max-width: 100%;
-      opacity: 0.9;
+      opacity: $opacity-lg;
     }
   }
 }

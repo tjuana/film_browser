@@ -1,5 +1,5 @@
 import { Carousel } from '@widgets/carousel';
-import { Skeleton } from '@shared/ui/Skeleton';
+import { Skeleton } from '@shared/ui/Skeleton/Skeleton';
 import { useMovies, type Category } from '../model/useMovies';
 
 type MoviesCarouselProps = { title: string; category: Category };

@@ -7,12 +7,12 @@
   padding: $space-md $space-xl;
   border-radius: $radius-md;
   font-size: $font-size-lg;
-  font-weight: 600;
+  font-weight: $font-weight-semibold;
   cursor: pointer;
   transition: $transition-base;
 
   &:hover {
     background: color.adjust($color-primary, $lightness: -10%);
-    transform: translateY(-2px);
+    transform: translateY(-$space-xs);
   }
 }

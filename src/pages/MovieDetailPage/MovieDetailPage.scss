@@ -13,7 +13,7 @@
       color: $color-text-muted;
       text-decoration: none;
       margin-bottom: $space-md;
-      font-weight: 500;
+      font-weight: $font-weight-medium;
       transition: $transition-base;
 
       &:hover {
@@ -31,7 +31,7 @@
 
   .detail-content {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: minmax(18.75rem, 1fr) 2fr;
     gap: $space-xl;
     align-items: start;
 
@@ -58,12 +58,12 @@
         font-size: $font-size-lg;
 
         .release-date {
-          opacity: 0.8;
+          opacity: $opacity-lg;
         }
 
         .rating {
           color: $color-warning;
-          font-weight: 600;
+          font-weight: $font-weight-semibold;
         }
       }
 
@@ -71,7 +71,7 @@
         font-size: $font-size-lg;
         line-height: 1.6;
         margin-bottom: $space-xl;
-        opacity: 0.9;
+        opacity: $opacity-lg;
       }
     }
   }

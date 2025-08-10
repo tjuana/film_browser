@@ -8,7 +8,7 @@
   p {
     font-size: $font-size-base;
     margin-bottom: $space-lg;
-    opacity: 0.8;
+    opacity: $opacity-lg;
   }
 
   .wishlist-browse-link {
@@ -18,19 +18,19 @@
     text-decoration: none;
     padding: $space-sm $space-lg;
     border-radius: $radius-md;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     transition: $transition-base;
 
     &:hover {
       background: color.adjust($color-primary, $lightness: -10%);
-      transform: translateY(-2px);
+      transform: translateY(-$space-xs);
     }
   }
 }
 
 .wishlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
   gap: $space-lg;
 }
 
@@ -39,10 +39,10 @@
   border-radius: $radius-lg;
   overflow: hidden;
   transition: $transition-base;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur($space-sm * 2);
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-$space-xs);
     box-shadow: $shadow-lg;
     background: color.adjust($color-surface-variant, $lightness: 5%);
   }
@@ -54,7 +54,7 @@
     border: none;
     padding: $space-xs;
     font-size: $font-size-sm;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     cursor: pointer;
     transition: $transition-base;
 

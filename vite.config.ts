@@ -16,9 +16,10 @@ export default defineConfig({
   test: {
     environment: 'jsdom', // дает document/window
     globals: true,
-    setupFiles: './src/tests/setup.ts', // jest-dom и моки
+    setupFiles: './src/setup.ts', // jest-dom и моки
     css: true,
     restoreMocks: true,
+    include: ['src/**/*.test.{ts,tsx}'],
   },
   css: {
     preprocessorOptions: {

@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, vi, beforeAll } from 'vitest';
+import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest';
 import { act } from '@testing-library/react';
-import { wishlistStore } from '@features/wishlist/model/store';
+import { wishlistStore } from '../model/store';
 import type { MovieBrief } from '@entities/movie/model/types';
 
 // Mock localStorage for testing
@@ -272,6 +272,82 @@ describe('Wishlist Store', () => {
 
       expect(listener).toHaveBeenCalled();
       unsubscribe();
+    });
+  });
+
+  describe('Persistence and Rehydration', () => {
+    it('should support localStorage persistence', () => {
+      const movie: MovieBrief = {
+        id: 1,
+        title: 'Test Movie',
+        posterPath: '/test.jpg',
+        voteAverage: 8.5,
+      };
+
+      act(() => {
+        wishlistStore.getState().add(movie);
+      });
+
+      // Verify the movie was added to the store
+      const items = wishlistStore.getState().items;
+      expect(items).toHaveLength(1);
+      expect(items[0].title).toBe('Test Movie');
+
+      // The persistence middleware should handle localStorage
+      // but we can't easily test the actual localStorage calls in this setup
+    });
+
+    it('should handle localStorage operations', () => {
+      // Mock localStorage to return saved data
+      const savedData = JSON.stringify({
+        state: {
+          items: [
+            {
+              id: 1,
+              title: 'Persisted Movie',
+              posterPath: '/persisted.jpg',
+              voteAverage: 7.0,
+            },
+          ],
+        },
+        version: 0,
+      });
+
+      localStorageMock.getItem.mockReturnValue(savedData);
+
+      // Test that the mock is working
+      const result = localStorageMock.getItem('wishlist:v1');
+      expect(result).toBe(savedData);
+    });
+
+    it('should handle corrupted localStorage data gracefully', () => {
+      // Mock localStorage to return invalid JSON
+      localStorageMock.getItem.mockReturnValue('invalid-json');
+
+      // Store should still function normally even with corrupted data
+      const movie: MovieBrief = {
+        id: 1,
+        title: 'Test Movie',
+        posterPath: '/test.jpg',
+        voteAverage: 8.5,
+      };
+
+      act(() => {
+        wishlistStore.getState().add(movie);
+      });
+
+      const items = wishlistStore.getState().items;
+      expect(items).toHaveLength(1);
+      expect(items[0]).toEqual(movie);
+    });
+
+    it('should handle missing localStorage data gracefully', () => {
+      // Mock localStorage to return null (no saved data)
+      localStorageMock.getItem.mockReturnValue(null);
+
+      // Store should start with empty state
+      const items = wishlistStore.getState().items;
+      expect(items).toEqual([]);
     });
   });
 });

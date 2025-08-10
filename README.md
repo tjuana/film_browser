@@ -29,7 +29,11 @@ VITE_TMDB_KEY=your_tmdb_api_key_here
 
 ### Development
 ```bash
+# Client-side development
 npm run dev
+
+# SSR development
+npm run dev:ssr
 ```
 
 ### Testing
@@ -39,7 +43,14 @@ npm test
 
 ### Production Build
 ```bash
+# Standard SPA build
 npm run build
+
+# SSR production build
+npm run build:ssr
+
+# Preview SSR production
+npm run preview:ssr
 ```
 
 ## 🏗️ Architecture
@@ -57,12 +68,13 @@ src/
 ```
 
 ### Key Technologies
-- **React 18** with TypeScript
-- **Vite** for build tooling
-- **React Router 7** with data APIs for SSR-ready navigation
+- **React 19** with TypeScript
+- **Vite** for build tooling with SSR support
+- **React Router 7** with data APIs and server-side rendering
 - **Zustand** for client-side state management
 - **SCSS** with design tokens
 - **Vitest** + React Testing Library
+- **Express** for SSR server
 
 ## 🎨 Design System
 
@@ -76,40 +88,57 @@ The project uses a **comprehensive design token system** with:
 
 **Token Usage**: 100% of defined tokens are actively used (58/58) ✅
 
-## 🚀 Modern Data Loading with React Router 7
+## 🚀 Server-Side Rendering (SSR) with React Router 7
 
-This application uses **React Router 7 data APIs** for improved data loading patterns:
+This application implements **full server-side rendering** using React Router 7's static APIs for production-ready SEO and performance.
+
+### SSR Implementation
+- **Entry Points**: Separate client and server bundles
+  - `src/entry-client.tsx` - Client hydration with `hydrateRoot`
+  - `src/entry-server.tsx` - Server rendering with `createStaticRouter`
+- **Universal Routing**: Shared route configuration between client and server
+- **Data Loading**: All loaders run server-side for initial page load
+- **Progressive Enhancement**: Works without JavaScript, enhanced with JS
 
 ### Data Loading Architecture
 - **Route Loaders**: All external API data is fetched at the route level
   - `src/app/routes/index.tsx` - Home page movie lists  
   - `src/app/routes/movie.$id.tsx` - Individual movie details
-- **Component Props**: Pages and widgets receive data via props, not hooks
-- **No Client Fetching**: Zero `useQuery` or `useEffect` for API calls in components
+- **SSR-Safe Components**: Browser APIs guarded for server compatibility
+- **State Hydration**: Zustand wishlist rehydrates from localStorage on client
+
+### SSR Features
+- **Full HTML Content**: Complete movie data rendered server-side
+- **SEO Optimized**: Search engines see full content on initial load
+- **Fast Initial Paint**: No loading spinners or skeleton states
+- **Smooth Hydration**: React Router handles client-side takeover seamlessly
+- **Browser API Guards**: Carousel and resize hooks work safely in SSR
 
 ### How Data Flows
-1. **Route Loaders** (`loader` functions) fetch data during navigation
-2. **Pages** use `useLoaderData()` to access fetched data  
-3. **Widgets** receive data as props from pages
-4. **Client State** (wishlist) remains in Zustand for interactivity
+1. **Server**: Route loaders fetch data during SSR
+2. **HTML**: Complete page rendered with all content
+3. **Client**: JavaScript hydrates existing markup
+4. **Navigation**: Subsequent routes use client-side routing
+5. **Wishlist**: Client state restored from localStorage after hydration
 
-### Loader Locations
-```typescript
-// Route loaders handle external API calls
-src/app/routes/index.tsx        // Home: popular, top-rated, upcoming movies
-src/app/routes/movie.$id.tsx    // Movie details: single movie + category
-src/app/routes/wishlist.tsx     // Wishlist: no loader (uses Zustand)
+### Production SSR
+```bash
+# Build for SSR
+npm run build:ssr
 
-// Router configuration  
-src/app/router/router.tsx       // Centralized route + loader mapping
+# Run production SSR server
+npm run preview:ssr
+
+# Development SSR server
+npm run dev:ssr
 ```
 
 ### Benefits
-- **Better UX**: Data loads during navigation, not after
-- **No Loading States**: Content available when route renders
-- **Cleaner Architecture**: Centralized data fetching in loaders  
-- **Improved Performance**: Parallel data fetching during navigation
-- **Future-Proof**: Compatible with SSR if needed later
+- **SEO Ready**: Full content visible to search engines
+- **Performance**: Faster Time to First Contentful Paint
+- **Accessibility**: Content available before JavaScript loads
+- **Resilience**: Site works with JavaScript disabled
+- **Modern Stack**: Leverages React Router 7's built-in SSR capabilities
 
 ## 🧪 Testing
 
@@ -164,6 +193,6 @@ Comprehensive test coverage includes:
 
 ---
 
-**Tech Stack**: React • TypeScript • Vite • React Router 7 • SCSS • Zustand • Vitest  
-**Architecture**: Feature-Sliced Design (FSD) • Modern Data Loading with Route Loaders  
+**Tech Stack**: React 19 • TypeScript • Vite • React Router 7 • SCSS • Zustand • Vitest • Express SSR  
+**Architecture**: Feature-Sliced Design (FSD) • Server-Side Rendering • Route-Based Data Loading  
 **API**: The Movie Database (TMDB)

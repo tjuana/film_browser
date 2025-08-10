@@ -72,12 +72,18 @@ export const useCarouselNav: UseCarouselNav = () => {
       ro.observe(el);
     }
 
-    window.addEventListener('resize', updateState);
+    // Guard window access for SSR
+    const hasWindow = typeof window !== 'undefined';
+    if (hasWindow) {
+      window.addEventListener('resize', updateState);
+    }
 
     return () => {
       el.removeEventListener('scroll', onScroll);
       ro?.disconnect();
-      window.removeEventListener('resize', updateState);
+      if (hasWindow) {
+        window.removeEventListener('resize', updateState);
+      }
     };
   }, [updateState]);
 

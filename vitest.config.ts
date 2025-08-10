@@ -1,9 +1,8 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+/// <reference types="vitest" />
+import { defineConfig } from 'vitest/config';
 import path from 'node:path';
 
 export default defineConfig({
-  plugins: [react()],
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'src/app'),
@@ -14,17 +13,13 @@ export default defineConfig({
       '@widgets': path.resolve(__dirname, 'src/widgets'),
     },
   },
-  build: {
-    rollupOptions: {
-      input: {
-        client: './index.html',
-        server: './src/entry-server.tsx',
-      },
-    },
-  },
-  ssr: {
-    // Prevent these modules from being externalized for SSR
-    noExternal: ['react-router-dom'],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/setup.ts',
+    css: true,
+    restoreMocks: true,
+    include: ['src/**/*.test.{ts,tsx}'],
   },
   css: {
     preprocessorOptions: {

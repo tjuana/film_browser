@@ -14,12 +14,10 @@ export function usePrefersReducedMotion(): boolean {
 
     update();
     mql.addEventListener?.('change', update);
-    // @ts-expect-error Safari legacy API
     mql.addListener?.(update);
 
     return () => {
       mql.removeEventListener?.('change', update);
-      // @ts-expect-error Safari legacy API
       mql.removeListener?.(update);
     };
   }, []);

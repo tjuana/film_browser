@@ -1,14 +1,17 @@
-import { useWishlistStore } from '@features/wishlist/model/store';
+import {
+  useWishlistSelectors,
+  useWishlistActions,
+} from '@features/wishlist/model/store';
 import { MovieCard } from '@entities/movie/ui/MovieCard';
 import { Button } from '@shared/ui/Button';
 import './styles/_wishlist.scss';
 
 export const WishlistGrid = () => {
-  const items = useWishlistStore((s) => s.items);
-  const remove = useWishlistStore((s) => s.remove);
-  const clear = useWishlistStore((s) => s.clear);
+  // Use the new hooks for better performance and cleaner code
+  const { items, isEmpty } = useWishlistSelectors();
+  const { remove, clear } = useWishlistActions();
 
-  if (items.length === 0) {
+  if (isEmpty) {
     return (
       <div className="wishlist-empty">
         <p>Your wish list is empty.</p>

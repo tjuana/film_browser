@@ -1,4 +1,4 @@
-import { useWishlistStore } from '../model/store';
+import { useWishlistSelectors, useWishlistActions } from '../model/store';
 import type { MovieBrief } from '@entities/movie/model/types';
 import './WishlistToogle.scss';
 
@@ -7,17 +7,20 @@ type Props = {
 };
 
 export function WishlistToggle({ movie }: Props) {
-  const has = useWishlistStore((s) => s.has(movie.id));
-  const toggle = useWishlistStore((s) => s.toggle);
+  // Use the new hooks for better performance and cleaner code
+  const { has } = useWishlistSelectors();
+  const { toggle } = useWishlistActions();
+
+  const isInWishlist = has(movie.id);
 
   return (
     <button
       type="button"
-      aria-pressed={has}
+      aria-pressed={isInWishlist}
       onClick={() => toggle(movie)}
-      className={`btn btn--wishlist${has ? ' is-active' : ''}`}
+      className={`btn btn--wishlist${isInWishlist ? ' is-active' : ''}`}
     >
-      {has ? 'Remove from Wish List' : 'Add to Wish List'}
+      {isInWishlist ? 'Remove from Wish List' : 'Add to Wish List'}
     </button>
   );
 }

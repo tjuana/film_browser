@@ -8,13 +8,13 @@
   p {
     font-size: $font-size-base;
     margin-bottom: $space-lg;
-    opacity: $opacity-lg;
+    color: $color-text-muted;
   }
 
   .wishlist-browse-link {
     display: inline-block;
     background: $color-primary;
-    color: $color-text-on-primary; // token ensures contrast on primary
+    color: $color-text-on-primary;
     text-decoration: none;
     padding: $space-sm $space-lg;
     border-radius: $radius-md;
@@ -35,16 +35,18 @@
 }
 
 .wishlist-item {
-  background: $color-surface-variant;
+  background: $color-surface-elevated;
   border-radius: $radius-lg;
   overflow: hidden;
   transition: $transition-base;
   backdrop-filter: blur($space-sm * 2);
+  border: 1px solid $color-surface-interactive;
 
   &:hover {
     transform: translateY(-$space-xs);
     box-shadow: $shadow-lg;
-    background: color.adjust($color-surface-variant, $lightness: 5%);
+    background: $color-surface-interactive;
+    border-color: $color-primary;
   }
 
   .remove-btn {

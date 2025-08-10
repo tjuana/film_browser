@@ -33,7 +33,9 @@ export const MovieDetailContent = ({
       <div className="movie-detail-view__info">
         <div className="movie-detail-view__meta">
           <span className="movie-detail-view__release-date">{releaseDate}</span>
-          <span className="movie-detail-view__rating">★ {voteAverage}</span>
+          <span className="movie-detail-view__rating">
+            ★ {voteAverage?.toFixed(1)}
+          </span>
           {runtime && (
             <span className="movie-detail-view__runtime">{runtime} min</span>
           )}

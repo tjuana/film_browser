@@ -33,14 +33,14 @@ export const WishlistGrid = () => {
               posterUrl={m.posterPath}
               ratio="poster"
             />
-            <Button className="remove-btn" onClick={() => remove(m.id)}>
+            <Button variant="danger" size="small" onClick={() => remove(m.id)}>
               Remove
             </Button>
           </div>
         ))}
       </div>
       <div className="wishlist-actions">
-        <Button className="clear-btn" onClick={() => clear()}>
+        <Button variant="danger" onClick={() => clear()}>
           Clear all
         </Button>
       </div>

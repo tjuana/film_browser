@@ -10,3 +10,26 @@
   border-radius: $radius-md;
   animation: skeleton 1.2s ease-in-out infinite;
 }
+
+// Skeleton variants
+.skeleton--text {
+  height: 1em;
+  border-radius: $radius-sm;
+}
+
+.skeleton--rectangular {
+  border-radius: $radius-md;
+}
+
+.skeleton--circular {
+  border-radius: 50%;
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { useWishlistSelectors, useWishlistActions } from '../model/store';
+import { Button } from '@shared/ui/Button';
 import type { MovieBrief } from '@entities/movie/model/types';
-import './WishlistToogle.scss';
 
 type Props = {
   movie: MovieBrief;
@@ -14,13 +14,14 @@ export function WishlistToggle({ movie }: Props) {
   const isInWishlist = has(movie.id);
 
   return (
-    <button
+    <Button
       type="button"
+      variant={isInWishlist ? 'secondary' : 'primary'}
+      size="large"
       aria-pressed={isInWishlist}
       onClick={() => toggle(movie)}
-      className={`btn btn--wishlist${isInWishlist ? ' is-active' : ''}`}
     >
       {isInWishlist ? 'Remove from Wish List' : 'Add to Wish List'}
-    </button>
+    </Button>
   );
 }

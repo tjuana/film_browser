@@ -49,32 +49,11 @@
     border-color: $color-primary;
   }
 
-  .remove-btn {
+  .btn {
     width: 100%;
-    background: $color-danger;
-    color: $color-text-on-danger;
-    border: none;
-    padding: $space-xs;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-semibold;
-    cursor: pointer;
-    transition: $transition-base;
-
-    &:hover {
-      background: color.adjust($color-danger, $lightness: -10%);
-    }
   }
 }
 
 .wishlist-actions {
   margin-top: $space-lg;
-
-  .clear-btn {
-    background: $color-danger;
-    color: $color-text-on-danger;
-
-    &:hover {
-      background: color.adjust($color-danger, $lightness: -10%);
-    }
-  }
 }

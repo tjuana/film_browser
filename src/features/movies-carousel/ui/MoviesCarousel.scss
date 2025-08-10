@@ -8,12 +8,6 @@
     padding: $space-sm 0;
   }
 
-  &__loading-skeleton {
-    width: $carousel-item-width;
-    height: $carousel-item-width;
-    flex-shrink: 0;
-  }
-
   &__error {
     text-align: center;
     padding: $space-lg;
@@ -21,21 +15,6 @@
 
     p {
       margin-bottom: $space-md;
-    }
-  }
-
-  &__retry-button {
-    background: $color-primary;
-    color: $color-text-on-primary;
-    border: none;
-    padding: $space-sm $space-lg;
-    border-radius: $radius-md;
-    font-weight: $font-weight-semibold;
-    cursor: pointer;
-    transition: $transition-base;
-
-    &:hover {
-      background: $color-primary-600;
     }
   }
 }

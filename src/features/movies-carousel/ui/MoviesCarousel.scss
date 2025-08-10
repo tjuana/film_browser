@@ -9,8 +9,8 @@
   }
 
   &__loading-skeleton {
-    width: 11.25rem; // Same as $carousel-item-width
-    height: 11.25rem;
+    width: $carousel-item-width;
+    height: $carousel-item-width;
     flex-shrink: 0;
   }
 

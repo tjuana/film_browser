@@ -47,7 +47,7 @@
   backdrop-filter: saturate(120%) blur($space-sm * 3);
   background: rgba($color-text, $opacity-md);
   color: $color-text;
-  border: 1px solid rgba($color-text, $opacity-lg);
+  border: $border-thin solid rgba($color-text, $opacity-lg);
   opacity: 0;
   pointer-events: none;
   transition: $transition-base;

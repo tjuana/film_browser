@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use './_variables' as *;
 
-@mixin container($max: 1280px) {
+@mixin container($max: $layout-max-width) {
   width: 100%;
   max-width: $max;
   margin-inline: auto;

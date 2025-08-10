@@ -40,7 +40,7 @@
   overflow: hidden;
   transition: $transition-base;
   backdrop-filter: blur($space-sm * 2);
-  border: 1px solid $color-surface-interactive;
+  border: $border-thin solid $color-surface-interactive;
 
   &:hover {
     transform: translateY(-$space-xs);

@@ -2,7 +2,7 @@
 @use 'sass:color';
 
 .movie-detail-view {
-  max-width: 1200px;
+  max-width: $layout-content-width;
   margin: 0 auto;
   padding: $space-xl 0;
 
@@ -44,7 +44,7 @@
 
   &__content {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: $layout-sidebar-width 1fr;
     gap: $space-xl;
     align-items: start;
 
@@ -61,7 +61,7 @@
 
   &__poster-image {
     width: 100%;
-    max-width: 300px;
+    max-width: $layout-sidebar-width;
     height: auto;
     border-radius: $radius-lg;
     box-shadow: $shadow-lg;
@@ -96,7 +96,7 @@
 
   &__overview {
     font-size: $font-size-lg;
-    line-height: 1.6;
+    line-height: $line-height-relaxed;
     margin: 0 0 $space-xl;
     color: $color-text-muted;
   }
@@ -164,7 +164,7 @@
         $color-accent,
         color.adjust($color-accent, $lightness: -15%)
       );
-      border: 2px solid $color-accent;
+      border: $border-medium solid $color-accent;
 
       &:hover {
         background: linear-gradient(
@@ -190,7 +190,7 @@
         $color-success,
         color.adjust($color-success, $lightness: -15%)
       );
-      border: 2px solid $color-success;
+      border: $border-medium solid $color-success;
 
       &:hover {
         background: linear-gradient(
@@ -217,7 +217,7 @@
         $color-info,
         color.adjust($color-info, $lightness: -15%)
       );
-      border: 2px solid $color-info;
+      border: $border-medium solid $color-info;
 
       &:hover {
         background: linear-gradient(
@@ -234,7 +234,7 @@
   &__additional-info {
     margin-top: $space-2xl;
     padding-top: $space-xl;
-    border-top: 1px solid rgba($color-text, $opacity-md);
+    border-top: $border-thin solid rgba($color-text, $opacity-md);
   }
 
   &__section {
@@ -266,7 +266,7 @@
     border-radius: $radius-md;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
-    border: 1px solid $color-primary;
+    border: $border-thin solid $color-primary;
     transition: $transition-base;
 
     &:hover {
@@ -288,7 +288,7 @@
     padding: $space-sm;
     background: $color-surface-elevated;
     border-radius: $radius-md;
-    border: 1px solid $color-surface-interactive;
+    border: $border-thin solid $color-surface-interactive;
     transition: $transition-base;
 
     &:hover {
@@ -298,9 +298,9 @@
   }
 
   &__company-logo {
-    height: 40px;
+    height: $space-xl * 2;
     width: auto;
-    max-width: 80px;
+    max-width: $space-xl * 4;
     object-fit: contain;
     background: white;
     padding: $space-xs;
@@ -326,7 +326,7 @@
     padding: $space-sm $space-md;
     background: $color-surface-elevated;
     border-radius: $radius-md;
-    border: 1px solid $color-surface-interactive;
+    border: $border-thin solid $color-surface-interactive;
     transition: $transition-base;
 
     &:hover {

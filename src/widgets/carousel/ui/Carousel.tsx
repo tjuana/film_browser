@@ -1,10 +1,11 @@
-import { CarouselButton } from './CarouselButton';
+import React from 'react';
 import { CarouselItem } from './CarouselItem';
+import { CarouselButton } from './CarouselButton';
 import '@widgets/carousel/styles/_carousel.scss';
 import { MovieCard } from '@entities/movie/ui/MovieCard';
-import { useCarouselNav } from '@widgets/carousel/model/useCarouselNav';
-import { useCarouselDrag } from '@widgets/carousel/model/useCarouselDrag';
-import type { MovieBrief } from '@entities/movie/api/types';
+import { useCarouselNav } from '../model/useCarouselNav';
+import { useCarouselDrag } from '../model/useCarouselDrag';
+import type { MovieBrief } from '@entities/movie/model/types';
 
 type CarouselProps = {
   title: string;
@@ -41,7 +42,7 @@ export const Carousel = ({ title, items, renderItem }: CarouselProps) => {
                 isAdult={m.isAdult}
                 releaseDate={m.releaseDate}
                 originalTitle={m.originalTitle}
-                ratio="poster" // для карусели 2:3; квадрат — ratio="square"
+                ratio="poster"
               />
             )}
           </CarouselItem>

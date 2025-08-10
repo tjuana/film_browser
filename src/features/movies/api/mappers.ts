@@ -1,4 +1,5 @@
-import type { Movie, MovieBrief, TmdbMovie } from './types';
+import type { Movie, MovieBrief } from '@entities/movie/model/types';
+import type { TmdbMovie } from './types';
 import { TMDB_IMAGE_BASE } from '@shared/config/env';
 
 export const imageUrl = (

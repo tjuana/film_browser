@@ -1,20 +1,6 @@
-export type MovieBrief = {
-  id: number;
-  title: string;
-  posterPath?: string;
-  voteAverage?: number;
-  category?: 'popular' | 'top' | 'upcoming';
-  releaseDate?: string;
-  originalTitle?: string;
-  isAdult?: boolean;
-};
+import type { MovieBrief, Movie } from '@entities/movie/model/types';
 
-export type Movie = MovieBrief & {
-  overview?: string;
-  backdropPath?: string;
-  runtime?: number;
-};
-
+// TMDB API response types
 export type TmdbMovie = {
   id: number;
   title?: string;
@@ -29,6 +15,7 @@ export type TmdbMovie = {
   adult?: boolean;
 };
 
+// Service interface
 export type MoviesService = {
   kind: 'live' | 'mock';
   getPopular: () => Promise<MovieBrief[]>;

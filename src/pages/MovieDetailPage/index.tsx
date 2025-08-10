@@ -1,13 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
 import './MovieDetailPage.scss';
 import { useQuery } from '@tanstack/react-query';
-import { createMoviesService } from '@entities/movie/api/factory';
+import { createMoviesService } from '@features/movies/api/factory';
 import { WishlistToggle } from '@features/wishlist/ui/WishlistToggle';
 
 export const MovieDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const svc = createMoviesService();
   const numericId = Number(id);
+
   const { data: movie } = useQuery({
     queryKey: ['movie', numericId],
     queryFn: () => svc.getMovieById(numericId),
@@ -15,6 +16,7 @@ export const MovieDetailPage = () => {
   });
 
   if (!movie) return null;
+
   return (
     <div className="movie-detail-page">
       <header className="detail-header">

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { MovieBrief } from '@entities/movie/api/types';
+import type { MovieBrief } from '@entities/movie/model/types';
 
 type WishlistState = {
   items: MovieBrief[];

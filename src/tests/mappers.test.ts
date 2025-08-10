@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { imageUrl, mapBrief, mapMovie } from '@entities/movie/api/mappers';
+import { imageUrl, mapBrief, mapMovie } from '@features/movies/api/mappers';
 
 describe('mappers', () => {
   it('imageUrl builds correct path or undefined', () => {

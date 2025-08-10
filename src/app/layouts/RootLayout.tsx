@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Container } from '@shared/ui/Container';
+import { ROUTES } from '@app/router/routes';
 import './RoorLayout.scss';
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
@@ -9,14 +10,15 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
       <header className="header">
         <Container>
           <nav aria-label="Primary" className="main-nav">
+            <h1 className="hmain-nav-title">Film Browser</h1>
             <ul className="nav-list">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link">
+                <NavLink to={ROUTES.HOME} className="nav-link">
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/wishlist" className="nav-link">
+                <NavLink to={ROUTES.WISHLIST} className="nav-link">
                   Wish List
                 </NavLink>
               </li>

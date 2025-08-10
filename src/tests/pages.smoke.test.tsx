@@ -3,6 +3,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { HomePage } from '@pages/HomePage';
 import { WishListPage } from '@pages/WishListPage';
+import { RootLayout } from '@app/layouts/RootLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const renderWithQuery = (ui: React.ReactNode) => {
@@ -15,7 +16,14 @@ describe('pages smoke', () => {
     renderWithQuery(
       <MemoryRouter initialEntries={['/']}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              <RootLayout>
+                <HomePage />
+              </RootLayout>
+            }
+          />
         </Routes>
       </MemoryRouter>
     );

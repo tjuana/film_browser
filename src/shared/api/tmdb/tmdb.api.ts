@@ -1,9 +1,10 @@
-import type { MoviesService } from './types';
-import { mapBrief, mapMovie } from './mappers';
+import type { MoviesService } from '@features/movies/api/types';
+import { mapBrief, mapMovie } from '@features/movies/api/mappers';
 import { createHttpClient } from './http';
 
-export const createLiveMoviesService = (): MoviesService => {
+const createLiveMoviesService = (): MoviesService => {
   const http = createHttpClient();
+
   return {
     kind: 'live',
     async getPopular() {
@@ -24,3 +25,5 @@ export const createLiveMoviesService = (): MoviesService => {
     },
   };
 };
+
+export { createLiveMoviesService };

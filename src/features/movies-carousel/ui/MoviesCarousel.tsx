@@ -5,13 +5,18 @@ import { useMovies, type Category } from '../model/useMovies';
 type MoviesCarouselProps = { title: string; category: Category };
 
 export function MoviesCarousel({ title, category }: MoviesCarouselProps) {
-  const { data, isLoading, isError } = useMovies(category);
+  const { data, isLoading, isError, refetch } = useMovies(category);
 
   if (isError) {
     return (
       <section className="carousel-section">
         <h2>{title}</h2>
-        <div>Error</div>
+        <div>
+          <p>Error loading movies</p>
+          <button onClick={() => refetch()} className="retry-button">
+            Retry
+          </button>
+        </div>
       </section>
     );
   }

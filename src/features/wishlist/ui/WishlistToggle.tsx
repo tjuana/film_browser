@@ -1,5 +1,5 @@
 import { useWishlistStore } from '../model/store';
-import type { MovieBrief } from '@entities/movie/api/types';
+import type { MovieBrief } from '@entities/movie/model/types';
 import './WishlistToogle.scss';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import * as env from '@shared/config/env';
-import { createMoviesService } from '@entities/movie/api/factory';
+import { createMoviesService } from '@features/movies/api/factory';
 
 describe('factory', () => {
   const getHasKey = () => vi.spyOn(env, 'hasTmdb');

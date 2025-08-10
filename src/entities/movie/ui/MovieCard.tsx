@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { yearOf } from '@shared/lib/date/yearOf';
+import { ROUTES } from '@app/router/routes';
 import './MovieCard.scss';
 
 export type MovieCardProps = {
@@ -24,7 +25,7 @@ export function MovieCard({
   voteAverage,
   isAdult,
   releaseDate,
-  to = `/movie/${id}`,
+  to = `${ROUTES.MOVIE_DETAIL.replace(':id', id.toString())}`,
   ratio = 'poster',
   className,
 }: MovieCardProps) {

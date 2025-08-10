@@ -5,11 +5,14 @@
 
   .main-nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: $space-lg;
 
-    @media (min-width: $bp-md) {
-      justify-content: flex-start;
+    &__title {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      text-align: left;
     }
   }
 
@@ -30,7 +33,7 @@
     .nav-link {
       color: $color-text-muted;
       text-decoration: none;
-      padding: $space-xs $space-sm;
+      padding: $space-sm $space-md;
       border-radius: $radius-md;
       font-weight: $font-weight-medium;
       font-size: $font-size-sm;

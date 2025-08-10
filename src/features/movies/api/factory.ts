@@ -1,7 +1,7 @@
 import { hasTmdb } from '@shared/config/env';
 import type { MoviesService } from './types';
-import { createLiveMoviesService } from './tmdb.api';
-import { createMockMoviesService } from './tmdb.mock';
+import { createLiveMoviesService } from '@shared/api/tmdb/tmdb.api';
+import { createMockMoviesService } from '@shared/api/tmdb/tmdb.mock';
 
 export type MoviesServiceOptions = {
   forceMock?: boolean;

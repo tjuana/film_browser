@@ -15,6 +15,7 @@ export type MovieCardProps = {
   to?: string;
   ratio?: 'poster' | 'square';
   className?: string;
+  category?: 'popular' | 'top' | 'upcoming';
 };
 
 export function MovieCard({
@@ -25,10 +26,17 @@ export function MovieCard({
   voteAverage,
   isAdult,
   releaseDate,
-  to = `${ROUTES.MOVIE_DETAIL.replace(':id', id.toString())}`,
+  to,
   ratio = 'poster',
   className,
+  category,
 }: MovieCardProps) {
+  // Generate URL with category parameter if available
+  const defaultTo = category
+    ? `${ROUTES.MOVIE_DETAIL.replace(':id', id.toString())}?category=${category}`
+    : ROUTES.MOVIE_DETAIL.replace(':id', id.toString());
+
+  const finalTo = to ?? defaultTo;
   const displayTitle = title ?? originalTitle ?? 'Untitled';
   const showOriginal = Boolean(originalTitle && originalTitle !== displayTitle);
   const year = yearOf(releaseDate);
@@ -40,8 +48,10 @@ export function MovieCard({
     isAdult ? ', 18 plus' : '',
   ].join('');
 
-  const Root: React.ElementType = to ? Link : 'div';
-  const rootProps = to ? { to } : { role: 'article', tabIndex: 0 };
+  const Root: React.ElementType = finalTo ? Link : 'div';
+  const rootProps = finalTo
+    ? { to: finalTo }
+    : { role: 'article', tabIndex: 0 };
 
   return (
     <Root

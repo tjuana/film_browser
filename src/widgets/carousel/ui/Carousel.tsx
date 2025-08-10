@@ -42,6 +42,7 @@ export const Carousel = ({ title, items, renderItem }: CarouselProps) => {
                 isAdult={m.isAdult}
                 releaseDate={m.releaseDate}
                 originalTitle={m.originalTitle}
+                category={m.category}
                 ratio="poster"
               />
             )}

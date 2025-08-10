@@ -1,4 +1,5 @@
 @use '@shared/styles/_variables' as *;
+@use 'sass:color';
 
 .movie-detail-view {
   max-width: 1200px;
@@ -9,7 +10,7 @@
   &__error {
     text-align: center;
     padding: $space-xl;
-    color: $color-text-muted;
+    color: $color-text;
     font-size: $font-size-lg;
   }
 
@@ -90,6 +91,12 @@
     font-weight: $font-weight-semibold;
   }
 
+  &__runtime {
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    opacity: $opacity-lg;
+  }
+
   &__overview {
     font-size: $font-size-lg;
     line-height: 1.6;
@@ -99,5 +106,229 @@
 
   &__actions {
     margin-top: auto;
+  }
+
+  &__tagline {
+    font-style: italic;
+    color: $color-text-muted;
+    font-size: $font-size-lg;
+    margin: $space-sm 0 0;
+    opacity: $opacity-lg;
+  }
+
+  &__category-badge {
+    display: inline-block;
+    padding: $space-xs $space-sm;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: $space-md;
+
+    &--popular {
+      background: linear-gradient(
+        135deg,
+        $color-accent,
+        color.adjust($color-accent, $lightness: -10%)
+      );
+      color: $color-text-on-primary;
+    }
+
+    &--top {
+      background: linear-gradient(
+        135deg,
+        $color-success,
+        color.adjust($color-success, $lightness: -10%)
+      );
+      color: $color-text-on-primary;
+    }
+
+    &--upcoming {
+      background: linear-gradient(
+        135deg,
+        $color-info,
+        color.adjust($color-info, $lightness: -10%)
+      );
+      color: $color-text-on-primary;
+    }
+  }
+
+  // Category-based theme variations
+  &--popular {
+    .movie-detail-view__title {
+      font-family: $font-family-base; // Modern, clean font for popular movies
+      color: $color-accent;
+    }
+
+    .movie-detail-view__actions button {
+      background: linear-gradient(
+        135deg,
+        $color-accent,
+        color.adjust($color-accent, $lightness: -15%)
+      );
+      border: 2px solid $color-accent;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($color-accent, $lightness: -5%),
+          color.adjust($color-accent, $lightness: -20%)
+        );
+        transform: translateY(-$space-2xs);
+      }
+    }
+  }
+
+  &--top {
+    .movie-detail-view__title {
+      font-family: $font-family-heading; // Elegant serif for top-rated classics
+      color: $color-success;
+      font-weight: $font-weight-bold;
+    }
+
+    .movie-detail-view__actions button {
+      background: linear-gradient(
+        135deg,
+        $color-success,
+        color.adjust($color-success, $lightness: -15%)
+      );
+      border: 2px solid $color-success;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($color-success, $lightness: -5%),
+          color.adjust($color-success, $lightness: -20%)
+        );
+        transform: translateY(-$space-2xs);
+      }
+    }
+  }
+
+  &--upcoming {
+    .movie-detail-view__title {
+      font-family: $font-family-base; // Clean, futuristic font for upcoming
+      color: $color-info;
+      font-weight: $font-weight-medium;
+      text-shadow: 0 0 10px rgba($color-info, 0.3);
+    }
+
+    .movie-detail-view__actions button {
+      background: linear-gradient(
+        135deg,
+        $color-info,
+        color.adjust($color-info, $lightness: -15%)
+      );
+      border: 2px solid $color-info;
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          color.adjust($color-info, $lightness: -5%),
+          color.adjust($color-info, $lightness: -20%)
+        );
+        transform: translateY(-$space-2xs);
+      }
+    }
+  }
+
+  // Additional Info Area
+  &__additional-info {
+    margin-top: $space-2xl;
+    padding-top: $space-xl;
+    border-top: 1px solid rgba($color-text, $opacity-md);
+  }
+
+  &__section {
+    margin-bottom: $space-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin-bottom: $space-md;
+    font-family: $font-family-heading;
+  }
+
+  &__genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+  }
+
+  &__genre-tag {
+    background: rgba($color-primary, $opacity-lg);
+    color: $color-text;
+    padding: $space-xs $space-sm;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border: 1px solid $color-primary;
+  }
+
+  &__companies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $space-md;
+  }
+
+  &__company {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm;
+    background: rgba($color-surface-variant, $opacity-lg);
+    border-radius: $radius-md;
+    border: 1px solid rgba($color-text, $opacity-md);
+  }
+
+  &__company-logo {
+    height: 40px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    background: white;
+    padding: $space-xs;
+    border-radius: $radius-sm;
+  }
+
+  &__company-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $space-sm;
+  }
+
+  &__detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space-sm $space-md;
+    background: rgba($color-surface-variant, $opacity-lg);
+    border-radius: $radius-md;
+    border: 1px solid rgba($color-text, $opacity-md);
+  }
+
+  &__detail-label {
+    font-weight: $font-weight-semibold;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  &__detail-value {
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    font-size: $font-size-sm;
   }
 }

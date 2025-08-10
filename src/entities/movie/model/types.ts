@@ -10,8 +10,27 @@ export type MovieBrief = {
   isAdult?: boolean;
 };
 
+export type Genre = {
+  id: number;
+  name: string;
+};
+
+export type ProductionCompany = {
+  id: number;
+  name: string;
+  logoPath?: string;
+  originCountry?: string;
+};
+
 export type Movie = MovieBrief & {
   overview?: string;
   backdropPath?: string;
   runtime?: number;
+  genres?: Genre[];
+  productionCompanies?: ProductionCompany[];
+  tagline?: string;
+  status?: string;
+  budget?: number;
+  revenue?: number;
+  popularity?: number;
 };

@@ -44,9 +44,34 @@ const createMockMoviesService = (): MoviesService => ({
     if (!movie) throw new Error(`Movie ${id} not found`);
     return {
       ...movie,
-      overview: 'A compelling story that captivates audiences worldwide.',
+      overview:
+        'A compelling story that captivates audiences worldwide with its incredible characters and masterful storytelling.',
       backdropPath: '/placeholder.png',
       runtime: 120,
+      genres: [
+        { id: 28, name: 'Action' },
+        { id: 35, name: 'Comedy' },
+        { id: 80, name: 'Crime' },
+      ],
+      productionCompanies: [
+        {
+          id: 1,
+          name: 'Warner Bros. Pictures',
+          logoPath: '/wb-logo.png',
+          originCountry: 'US',
+        },
+        {
+          id: 2,
+          name: 'Legendary Entertainment',
+          logoPath: '/legendary-logo.png',
+          originCountry: 'US',
+        },
+      ],
+      tagline: 'The adventure begins here.',
+      status: 'Released',
+      budget: 150000000,
+      revenue: 750000000,
+      popularity: 477.8545,
     } as Movie;
   },
 });

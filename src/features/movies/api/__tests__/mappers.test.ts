@@ -256,11 +256,11 @@ describe('mappers', () => {
         poster_path: '/test.jpg',
         vote_average: 8.5,
         overview: 'Great movie',
-        runtime: null,
+        runtime: undefined,
       };
       const result = mapMovie(tmdb);
 
-      expect(result.runtime).toBeNull();
+      expect(result.runtime).toBeUndefined();
       expect(result.title).toBe('Test Movie');
     });
 

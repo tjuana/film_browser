@@ -1,0 +1,41 @@
+@use '@shared/styles/_variables' as *;
+
+.movies-carousel {
+  &__loading-grid {
+    display: flex;
+    gap: $space-sm;
+    overflow-x: auto;
+    padding: $space-sm 0;
+  }
+
+  &__loading-skeleton {
+    width: 11.25rem; // Same as $carousel-item-width
+    height: 11.25rem;
+    flex-shrink: 0;
+  }
+
+  &__error {
+    text-align: center;
+    padding: $space-lg;
+    color: $color-text-muted;
+
+    p {
+      margin-bottom: $space-md;
+    }
+  }
+
+  &__retry-button {
+    background: $color-primary;
+    color: $color-text-on-primary;
+    border: none;
+    padding: $space-sm $space-lg;
+    border-radius: $radius-md;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      background: $color-primary-600;
+    }
+  }
+}

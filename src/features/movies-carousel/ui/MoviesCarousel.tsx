@@ -1,6 +1,7 @@
 import { Carousel } from '@widgets/carousel';
 import { Skeleton } from '@shared/ui/Skeleton/Skeleton';
 import { useMovies, type Category } from '../model/useMovies';
+import './MoviesCarousel.scss';
 
 type MoviesCarouselProps = { title: string; category: Category };
 
@@ -11,9 +12,12 @@ export function MoviesCarousel({ title, category }: MoviesCarouselProps) {
     return (
       <section className="carousel-section">
         <h2>{title}</h2>
-        <div>
+        <div className="movies-carousel__error">
           <p>Error loading movies</p>
-          <button onClick={() => refetch()} className="retry-button">
+          <button
+            onClick={() => refetch()}
+            className="movies-carousel__retry-button"
+          >
             Retry
           </button>
         </div>
@@ -25,9 +29,9 @@ export function MoviesCarousel({ title, category }: MoviesCarouselProps) {
     return (
       <section className="carousel-section">
         <h2>{title}</h2>
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div className="movies-carousel__loading-grid">
           {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} style={{ width: 180, height: 180 }} />
+            <Skeleton key={i} className="movies-carousel__loading-skeleton" />
           ))}
         </div>
       </section>
@@ -37,15 +41,7 @@ export function MoviesCarousel({ title, category }: MoviesCarouselProps) {
   return (
     <section className="carousel-section">
       <h2>{title}</h2>
-      {isLoading ? (
-        <div style={{ display: 'flex', gap: 12 }}>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} style={{ width: 180, height: 180 }} />
-          ))}
-        </div>
-      ) : (
-        <Carousel title={title} items={data ?? []} />
-      )}
+      <Carousel title={title} items={data ?? []} />
     </section>
   );
 }

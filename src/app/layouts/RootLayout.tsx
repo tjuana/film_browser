@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Container } from '@shared/ui/Container';
 import { ROUTES } from '@app/router/routes';
-import './RoorLayout.scss';
+import './RootLayout.scss';
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
   return (
